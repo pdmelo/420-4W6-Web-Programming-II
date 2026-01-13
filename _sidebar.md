@@ -1,3 +1,4 @@
+<!--
 **Final Project**
 
 - [Proposal Example](project/example-proposal.md)
@@ -9,10 +10,11 @@
 - [2-Controllers](Assignments/2-controllers.md)
 - [3-Views](Assignments/3-views.md)
 - [4-Auth](Assignments/4-auth.md)
-
+-->
 **Week 1**
 
 - [Intro to Course](Notes/Week1/01_intro_to_course)
+<!--  
 - [0.1 NodeJS Basics](Notes/Week1/01-node-basics.md)
 - [0.2 Node Modules](Notes/Week1/02-node-modules.md)
 - [0.3 Callbacks & Promises](Notes/Week1/03-callbacks-promises.md)
@@ -88,3 +90,4 @@
 - [PostresSQL](Guides/database.md)
 - [REST API](Guides/restapi.md)
 - [Troubleshooting](Guides/troubleshooting.md)
+-->
