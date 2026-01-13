@@ -1,4 +1,4 @@
-# Web Programming II - Winter 2025
+# Web Programming II - Winter 2026
 
 _Welcome to 420-4W6 Web Programming_
 
@@ -13,6 +13,6 @@ The course outline is posted on Lea.
 
 # Class Timings
 
-Monday : 8:30 - 10:00 </br>
-Wednesday : 8:30 - 11:30 </br>
-Thursday : 8:30 - 10:00 </br>
+Monday : 11:30 am - 1:00 pm </br>
+Tuesday : 8:30 am - 10:00 am </br>
+Friday : 11:30 am - 2:30 pm </br>
