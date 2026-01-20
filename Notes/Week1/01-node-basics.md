@@ -61,14 +61,24 @@ First we’ll play around with JavaScript in the browser to establish a baseline
     ![string-methods](../../images/01string-methods.png)
 
 5.  Choose the `.toUpperCase()` method and execute the statement. You should see the string in all caps as the output.
-6.  Now let's try something a bit more fun! Go to [Google's homepage](https://google.com), right-click the logo, and click on _inspect element_. In the DOM that appears in the dev tools, find the `id` attribute that the `<img>` tag is using to display the Google logo. Take note of that `id` value.
+6.  Now let's try something a bit more fun! Go to [Google's homepage](https://google.com), right-click the logo, and click on _inspect element_. In the DOM that appears in the dev tools, find the `class` attribute that the `<svg>` tag is using to display the Google logo. Take note of that `class` name.
 7.  In another tab, look up any (appropriate) image you think would be funny to display on the Google page and copy the URL to the image. Make sure the URL ends in a valid image file extension like `.jpg`, `.png`, etc.
-8.  Back to the Google tab, in the dev tools console, type:
+8. Back to the Google tab, in the dev tools console, type:
 
-    > document.querySelector("#id or .class from step 6").srcset = ""; <br/>
-    > document.querySelector("#id or .classfrom step 6").src = "http://image.url/from/step/7.png";
+   > const logo = document.querySelector("svg.className from step 6");
+   >
+   > if (logo) {
+   >
+   > const img = document.createElement("img");
+   > img.src = "http://image.url/from/step/7.png";
+   > img.width = logo.getAttribute("width");
+   > img.height = logo.getAttribute("height");
+   >
+   > logo.replaceWith(img);
+   >
+   > }
 
-    And you should see your image replace the Google logo!
+   And you should see your image replace the Google logo!
 
 9.  Right-click on the text under the Google search button that says "Google offered in: Français" and note the ID of that element.
 10. In the dev tools console, change the text of the element to read `Made by <Your Name>` using JavaScript. It will be similar to how you changed the `.src` attribute on the `<img>` element from step 8, but you'll have to use the `.innerHTML` property this time to change the text.
@@ -140,6 +150,12 @@ _Blocking_ code means that you have to wait for the first operation to finish be
 
    The purpose of `setTimeout` is to execute code after a specified period of time. What is “special” about `setTimeout` is that it is _asynchronous_. This means that your program will continue to execute while `setTimeout` waits for time to pass on its own.
 
+    > **Note**
+    >
+    > `setTimeout` is a built-in global function in Node.js that schedules code to run asynchronously after a delay
+
+   
+
 8. Call `getUserAsync` and pass in `1` for the first parameter. The second parameter will be the callback function that we want `getUserAsync` to invoke. You can either write this callback function externally and pass it in by name:
 
    ```js
@@ -170,8 +186,9 @@ _Blocking_ code means that you have to wait for the first operation to finish be
     2. It will wait 2 seconds and then print `{ userId: 1 }` and `{ userId: 2 }` simultaneously.
 
 12. Take a screenshot of the terminal containing the output from running both scripts.
+     ![string-methods](../../images/0.2.3-Output.png)
 
-Hopefully you see the difference between _blocking/synchronous_ code and _non-blocking/asynchronous_ code. The blocking example had to wait for each step of the program to finish before executing the next line. The non-blocking example was able to start executing 2 calls of a function while printing the result of `1 + 1` at the same time!
+Hopefully you see the difference between _blocking/synchronous_ code and _non-blocking/asynchronous_ code. The blocking example had to wait for each step of the program to finish before executing the next line. The non-blocking example was able to start executing 2 calls of a function while printing the result of `1 + 1` at the same time! 😎
 
 ## 📥 Submission
 

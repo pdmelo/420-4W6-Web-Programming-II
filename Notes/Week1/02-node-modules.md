@@ -317,6 +317,7 @@ Even though there are many different core modules at our disposal when using Nod
 
 In `pokemon.json`, change one of the Pokemon names to your name. Run the program a few times and make sure to `console.log` the value of the `pokemon` array after the random names have been assigned. Take a screenshot of the output. I should see something like this:
 
+![npm-methods](../../images/0.3.3-Output.png)
 
 
 
@@ -324,8 +325,7 @@ In `pokemon.json`, change one of the Pokemon names to your name. Run the program
 
 
 
-
-Don’t worry that I have an extra `/Development-Environment/` in my path. My file structure is going to be a little different that yours! Yours should be `~/web-ii/Exercises/0.2-Node-Modules`. Submit the screenshot in the Moodle drop box called *Exercise 0.2 - Node Basics*.
+My file structure is going to be a little different that yours! Yours should be `~/web-ii/Exercises/0.2-Node-Modules`. Submit the screenshot in the Moodle drop box called *Exercise 0.2 - Node Basics*.
 
 ------
 
