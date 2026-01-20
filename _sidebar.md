@@ -11,12 +11,15 @@
 - [3-Views](Assignments/3-views.md)
 - [4-Auth](Assignments/4-auth.md)
 -->
+
 **Week 1**
 
 - [Intro to Course](Notes/Week1/01_intro_to_course)
-<!--  
+
 - [0.1 NodeJS Basics](Notes/Week1/01-node-basics.md)
 - [0.2 Node Modules](Notes/Week1/02-node-modules.md)
+
+<!--
 - [0.3 Callbacks & Promises](Notes/Week1/03-callbacks-promises.md)
 
 **Week 2**
@@ -78,10 +81,12 @@
 
 - [3.5 UI Testing](Notes/Week9/35-testing.md)
 
+
 **Guides**
 
-- [cURL](Guides/curl.md)
 - [Environment Setup](Guides/environment-setup.md)
+<!--
+- [cURL](Guides/curl.md)
 - [Debugging](Guides/debugging.md)
 - [Logging and Documentation](Guides/logging.md)
 - [Testing](Guides/testing.md)
@@ -90,4 +95,4 @@
 - [PostresSQL](Guides/database.md)
 - [REST API](Guides/restapi.md)
 - [Troubleshooting](Guides/troubleshooting.md)
--->
+  -->
