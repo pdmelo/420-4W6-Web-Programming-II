@@ -18,11 +18,11 @@
 
 - [0.1 NodeJS Basics](Notes/Week1/01-node-basics.md)
 - [0.2 Node Modules](Notes/Week1/02-node-modules.md)
-
-<!--
 - [0.3 Callbacks & Promises](Notes/Week1/03-callbacks-promises.md)
-
+- [0.4 TypeScript Intro](Notes/Week1/04-typescript.md)
+<!--
 **Week 2**
+
 
 - [1.1 MVC Exercise](Notes/Week2/11-mvc.md)
 - [Model View Controller](Notes/Week2/mvc.md)
@@ -80,7 +80,6 @@
 **Week 14**
 
 - [3.5 UI Testing](Notes/Week9/35-testing.md)
-
 
 **Guides**
 

@@ -1,6 +1,6 @@
 # 0.4 - TypeScript Intro
 
-## Resource
+## Resources
 
 I was going to create an exercise to introduce TypeScript, but there are already [so](https://www.typescriptlang.org/docs/) [many](https://www.w3schools.com/typescript/index.php) [resources](https://scrimba.com/learn/typescript) that have been created to do accomplish this very goal! Instead, please take 10-15 minutes to complete the following on [learn-ts.org](https://www.learn-ts.org/en/Welcome):
 

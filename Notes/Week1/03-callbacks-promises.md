@@ -43,6 +43,7 @@ What exactly is a `Promise` in JavaScript?
 > - **pending**: initial state, neither fulfilled nor rejected.
 > - **fulfilled**: meaning that the operation was completed successfully.
 > - **rejected**: meaning that the operation failed.
+> 
 
 ![Promise Anatomy](../../images/0.4.1-Promise-Anatomy.png)
 
@@ -55,7 +56,7 @@ We’ll start by coding our own callback system to asynchronously create new Pok
 > [!Note]
 > Anytime a Pokemon is mentioned in the instructions, replace it with whatever entity you might have changed it to from the [setup](#-setup) section above.
 
-### Callbacks
+## Callbacks
 
 1. Create a file called `callbacks.js` in the folder for this exercise.
 
@@ -89,7 +90,7 @@ We’ll start by coding our own callback system to asynchronously create new Pok
    ![RandomOut](../../images/03RandomOutput.png)
    This is because we’re using random values for fetchTime and createTime. If createTime is greater than fetchTime, it means that the createPokemon function will take longer to run. If it takes longer to run than fetchPokemon, then it should make sense that when fetchPokemon prints, it does not have the new Pokemon inside of pokemonDatabase to print, so it only prints the original three.
 
-​ Ideally, we would like to have the new Pokemon displayed 100% of the time, and in the right order. How can we fix this problem? You guessed it, callbacks! 🤩
+ Ideally, we would like to have the new Pokemon displayed 100% of the time, and in the right order. How can we fix this problem? You guessed it, callbacks! 🤩
 
 9. Modify the createPokemon function declaration to take a second parameter called callback.
 
@@ -123,9 +124,8 @@ Let’s see how we can get rid of _callback hell_ by using promises.
    2. The callback will take 2 parameters as input called `resolve` and `reject`.
    3. Move the `setTimeout` function entirely into the body of the promise’s callback.
    4. Change `callback()` to `resolve()` inside of `setTimeout`.
-   5. Insert the push to database line inside the resolve.( i added this line.)
    6. Remove the `callback` parameter from the parameter list of `createPokemon`.
-
+   
 3. Remove the calls to `createPokemon` and `fetchPokemon` from the bottom of this file and replace them with one call to `createPokemon`, passing in the one Pokemon object it normally takes.
 
 4. Now, because `createPokemon` returns a `Promise` object, we can call the `then()` method on it.
@@ -148,11 +148,11 @@ Chaining promises using `then` is great if we want multiple operations to run se
 4. After the array, call `Promise.all(pokemonPromises)`. This function takes an array of promises, and waits for all promises in the array to be fulfilled. Once all promises in the array are fulfilled, `Promise.all` returns a promise of its own. We can call `then` on this returned promise to execute something after all the simultaneous operations have finished. In this case, we want to execute `fetchPokemon` after all the Pokemon have been created.
 5. Run this program (`node promise-all.js`) several times and confirm that the new Pokemon are being printed 100% of the time, **but not** in the same order every time. It should make sense why the output is different each time you run the program. Since we are running all `createPokemon` operations **at the same time**, and each one of them takes a different time to run, we will get a different output each time.
 
-​ ![Promise-All](../../images/03Promise-All.png)
+ ![Promise-All](../../images/03Promise-All.png)
 
-​ We can compare the time difference between sequential operations and simultaneous operations by using [`console.time()`](https://developer.mozilla.org/en-US/docs/Web/API/Console/time):
+ We can compare the time difference between sequential operations and simultaneous operations by using [`console.time()`](https://developer.mozilla.org/en-US/docs/Web/API/Console/time):
 
-​ ![03SequentialvsSimultaneous](../../images/03SequentialvsSimultaneous.png)
+ ![03SequentialvsSimultaneous](../../images/03SequentialvsSimultaneous.png)
 
 The execution time was cut in half!
 

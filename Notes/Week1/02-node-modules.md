@@ -139,7 +139,7 @@ import fs from "fs";
 
 
 
-5. Run `npm init -y` (we’ll talk about NPM later in this exercise) and it should create a `package.json` file.
+5. Run `npm init -y` (we’ll talk about NPM later in this exercise)  a **very common first step when starting a Node project**. It should create a `package.json` file.
 6. Open `package.json` and add the following property:
 
 ```javascript
@@ -169,7 +169,7 @@ Right now our `app.js` is pretty small. Over time, as we add more complexity to 
 
 2. At the top of `utilities.js`, import the `fs` module as before.
 
-3. Declare two functions: `readFromJsonFile(filename)` and `writeToJsonFile(filename, data)` using the proper [*JSDoc annotations*](https://jsdoc.app/index.html) like we did in the [Type Checking](https://vikramsinghmtl.github.io/420-4W6-Web-Programming-II/exercises/02-node-modules/#type-checking) section above. What we’re going to do is *extend* the functionality of the `fs` functions we’ve used so far.
+3. Declare two functions: `readFromJsonFile(filename)` and `writeToJsonFile(filename, data)` using the proper [*JSDoc annotations*](https://jsdoc.app/index.html) like we did in the [Type Checking](https://pdmelo.github.io/420-4W6-Web-Programming-II/#/Notes/Week1/02-node-modules?id=type-checking) section above. What we’re going to do is *extend* the functionality of the `fs` functions we’ve used so far.
 
 4. Inside of `readFromJsonFile`:
 
