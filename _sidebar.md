@@ -24,16 +24,19 @@
 
 - [1.1 MVC Exercise](Notes/Week2/11-mvc.md)
 - [Model View Controller](Notes/Week2/mvc.md)
-
-**Guides**
-
-- [Environment Setup](Guides/environment-setup.md)
-<!--
 - [Docker](Notes/Week2/docker.md)
 - [1.2 Docker Exercise](Notes/Week2/12-docker.md)
 - [1.3 PostgreSQL Exercise](Notes/Week2/13-postgresql.md)
 
+**Guides**
+
+- [Environment Setup](Guides/environment-setup.md)
+- [TypeScript](Guides/typescript.md)
+- [Type Guards](Guides/type-guards.md)
+- [PostresSQL](Guides/database.md)
+<!--
 **Week 3**
+
 
 - [Object Relational Mapping](Notes/Week3/orm.md)
 
