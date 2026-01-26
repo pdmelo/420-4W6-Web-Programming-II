@@ -21,9 +21,34 @@ A **virtual machine** runs a full-blown “guest” operating system with virtua
 
 **TL;DR**: VMs create an entire new instance on top of the host OS to spin up an environment whereas containers leverage the host OS to spin up an environment.
 
-## 🖼️ Images
+## 🧱 Key Terms 
 
-A Docker image is to a container like what a recipe is to food; it is the instructions from which a specific container is created. Many containers can be created based on the same image.
+### 🐳**Container**
+
+A small, lightweight box that has:
+
+- Your app
+- Everything your app needs to run
+
+    #### Example:
+
+    A Python app container will include:
+
+    - Python
+    - Needed libraries
+    - The app code
+
+### 🖼️**Image**
+
+A Docker image is to a container like what a recipe is to food; it is the instructions from which a specific container is created. Many containers can be created based on the same image
+
+ You run an image → you get a container.
+
+### 📝**Dockerfile**
+
+A written recipe describing how to build an image.
+
+
 
 ## ✅ Advantages
 
@@ -33,6 +58,18 @@ Dockers enables developers to:
 - Push their applications into a test environment and execute automated and manual tests.
 - Find and fix bugs in the development environment and redeploy them to the test environment for testing and validation.
 - Deploying the fix to the customer by pushing the updated image to the production environment.
+
+
+
+## 👍 Simple One‑Line Definition
+
+**Docker lets you package apps with everything they need so they run exactly the same everywhere.**
+
+
+
+## ✨ Some more about docker
+
+**Docker lets you package apps with everything they need so they run exactly the same everywhere.**
 
 [Here’s a nice description](https://dev.to/npentrel/docker-jargon-from-dockerfile-to-container-942) from [dev.to user Naomi Pentrel](https://dev.to/npentrel):
 
