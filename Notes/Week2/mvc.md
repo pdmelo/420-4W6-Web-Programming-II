@@ -5,23 +5,47 @@ A **software design pattern** is a general, reusable solution to a commonly occu
 
 - Often capture best practices as they evolve over time​
 - Often inspire and get "built-in" to new languages and frameworks​
-	-	E.g., Object-oriented programming​
+- Are common in paradigms such as **object‑oriented programming**
 
-**Architectural patterns** are similar to design patterns but have a broader scope.  An architectural pattern is a general, reusable solution to a commonly occurring problem in software architecture within a given context.​
+**Architectural patterns** are similar to design patterns but operate at a broader, higher-level scope.  An **architectural pattern** provides a reusable solution to a recurring problem in software architecture, shaping the system’s overall structure.​
 
-Many design patterns and architectural patterns seek to help produce systems and code that are highly cohesive and loosely coupled.
+Goals of Good Software Design
+---
 
-**Cohesion**  refers to the degree to which how closely the elements within an operation are related.A code should exhibit **strong cohesion(highly cohesive)**
-Example:
-- Methods: each method performs one operation. 
-- Classes: a class achieves a fine-grain design or implementation goal.
+Designing good software often aims for two things:
 
-Coupling refers to the degree of dependency between modules. **Loose coupling** means that modules interact with each other via well-defined interfaces and are minimally dependent on one another's internal details.
+- **High cohesion** (each unit does one well‑defined thing)
+- **Low coupling** (units depend minimally on each other)
 
-**Advantages:**
+These together lead to clean, modular, maintainable systems.
+
+___
+
+**Cohesion**  refers to how closely related the responsibilities within a module are. 
+
+**Highly cohesive** code is focused and unified.
+Examples:
+
+- **Methods**: each method performs one operation. 
+
+- **Classes**: each class achieves a fine-grain design or implementation goal.
+___
+
+**Coupling** refers to the degree of dependency between modules. 
+
+**Loose coupling** means that modules
+
+-  interact with each other via well-defined interfaces 
+- Avoid relying on each other’s internal details
+
+___
+
+**Advantages of High Cohesion + Low Coupling:**
+
 - Scalability: Modules can be developed, deployed, and scaled independently.
 - Flexibility: Easier to replace or update individual modules without impacting others.
-![coupling-and-cohesion](../../images/coupling-and-cohesion.webp)
+  ![coupling-and-cohesion](../../images/coupling-and-cohesion.webp)
+
 ## Overview -MVC
 
 ![MVC](../../images/MVC.webp)
