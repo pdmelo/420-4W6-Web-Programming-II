@@ -12,8 +12,8 @@ You will be split into groups based on the feedback I received from the “Makin
 
 1. 🦸‍♀️ **Team Leader**: Your job is to keep the team focused and make sure you don’t start to deviate from the task at hand.
 2. ⏳ **Time-Keeper**: Your job is to keep an eye on the clock and make sure that the team doesn’t spend too much/little time on any one part.
-3. ✏️ **Scribe**: Your job is to write things down. Most likely you’ll be the one sharing your screen so that everyone can see what you’re writing.
-4. 🎙️ **Spokesperson**: Your job is to present your findings when we all come back together as a class.
+3. ✏️ **Scribe**: Your job is to write things down. 
+4. 🎙️ **Spokesperson**: Your job is to present your findings to the class.
 
 > 💡 If yours is a team of 3, then the leader and time-keeper can be the same person.
 
