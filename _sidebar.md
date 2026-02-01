@@ -4,13 +4,15 @@
 - [Proposal Example](project/example-proposal.md)
 - [Specifications](project/specifications.md)
 
+
 **Assignments**
 
 - [1-Models](Assignments/1-models.md)
+
 - [2-Controllers](Assignments/2-controllers.md)
 - [3-Views](Assignments/3-views.md)
 - [4-Auth](Assignments/4-auth.md)
--->
+  -->
 
 **Week 1**
 
@@ -28,17 +30,19 @@
 - [1.2 Docker Exercise](Notes/Week2/12-docker.md)
 - [1.3 PostgreSQL Exercise](Notes/Week2/13-postgresql.md)
 
+**Week 3**
+
+- [Object Relational Mapping](Notes/Week3/orm.md)
+
 **Guides**
 
 - [Environment Setup](Guides/environment-setup.md)
 - [TypeScript](Guides/typescript.md)
 - [Type Guards](Guides/type-guards.md)
 - [PostresSQL](Guides/database.md)
+
 <!--
-**Week 3**
 
-
-- [Object Relational Mapping](Notes/Week3/orm.md)
 
 **Week 4**
 
