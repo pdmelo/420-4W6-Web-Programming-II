@@ -4,6 +4,14 @@
 - [Proposal Example](project/example-proposal.md)
 - [Specifications](project/specifications.md)
 
+- [2-Controllers](Assignments/2-controllers.md)
+- [3-Views](Assignments/3-views.md)
+- [4-Auth](Assignments/4-auth.md)
+ -->
+
+**Assignments**
+
+- [1-Models](Assignments/1-models.md)
 
 **Assignments**
 
@@ -37,6 +45,9 @@
 **Guides**
 
 - [Environment Setup](Guides/environment-setup.md)
+- [Debugging](Guides/debugging.md)
+- [Logging and Documentation](Guides/logging.md)
+- [Testing](Guides/testing.md)
 - [TypeScript](Guides/typescript.md)
 - [Type Guards](Guides/type-guards.md)
 - [PostresSQL](Guides/database.md)

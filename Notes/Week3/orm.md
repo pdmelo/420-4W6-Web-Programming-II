@@ -4,7 +4,26 @@
 # 
 ## What
 
-Object-Relational Mapping (ORM) is a programming technique used to convert data between incompatible type systems. It is a technique used in creating a bridge between object-oriented programs and databases.In simpler terms, it’s a way to manage database data using objects in programming languages. ORM allows developers to work with database data as if they were working with regular objects in their chosen language, without having to write complex SQL queries.
+Object-Relational Mapping (ORM) is a programming technique that connects **object-oriented code** with **relational databases**.In simpler terms, it’s a way to manage database data using objects in programming languages. ORM allows developers to work with database data as if they were working with regular objects in their chosen language, without having to write complex SQL queries.
+
+👉 ORM lets us work with **database data as objects** instead of writing SQL queries.
+
+Instead of this:
+
+```
+SELECT * FROM users;
+```
+
+We can do this:
+
+```
+User.findAll();
+```
+
+So, ORM acts as a **bridge** between:
+
+- **Objects** in code (classes, objects)
+- **Tables** in a database (rows, columns)
 
 
 
