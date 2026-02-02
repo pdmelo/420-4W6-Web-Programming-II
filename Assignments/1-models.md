@@ -1,7 +1,7 @@
 # 1 - Models
 
 - 💯 **Worth**: 7%
-- 📅 **Due**: February 16, 2025 @ 23:59
+- 📅 **Due**: February 16, 2026 @ 02:00 am
 - 🚫 **Penalty**: Late submissions lose 10% per day to a maximum of 3 days. Nothing is accepted after 3 days and a grade of 0% will be given.
 
 ## 🎯 Objectives
@@ -14,7 +14,7 @@
 
 ## 🔨 Setup
 
-1. [Click here](https://classroom.github.com/a/8e9ITenX) to join the Git classroom.
+1. [Click here](https://classroom.github.com/a/VnbgAC1m) to join the Git classroom.
 2. Clone (do not download as a zip) the starter repository from GitHub.
 3. Make sure Docker Desktop is open.
 4. Start the development container in VS Code by using the `Dev Containers: Open Folder in Container...` command from the Command Palette (CTRL/CMD+SHIFT+P) and select the cloned directory.
@@ -38,7 +38,7 @@ To complete this assignment, you should be familiar with the following concepts 
 - **[TypeScript](Notes/Week2/14-typescript.md)**: Knowledge of basic TypeScript syntax and type system.
 - **[Database Interaction](Notes/Week2/12-docker.md)**: How to interact with a database using SQL.
 - **[CRUD Operations](Notes/Week2/13-postgresql.md)**: How to create, read, update, and delete data in a persistent storage system.
-- **[Testing with Jest](https://vikramsinghmtl.github.io/420-4W6-Web-Programming-II/guides/testing)**: Familiarity with Jest and how to run tests for TypeScript applications.
+- **[Testing with Jest](Guides/testing)**: Familiarity with Jest and how to run tests for TypeScript applications.
 
 >[!CAUTION]
 >
@@ -115,7 +115,7 @@ To submit your assignment, follow these steps:
 3. Submit your assignment on Gradescope.
 
 	1. Accept the invitation to Gradescope in your [JAC email](https://outlook.com/) using your `studentid@johnabbottcollege.net` address.
-	2. Go to Gradescope (TBD, I’ll update this to a link when its ready) and click the link for this assignment.
+	2. Go to Gradescope and click the link for this [assignment](https://www.gradescope.ca/courses/35557/assignments/180550) 
 	3. Select the correct repository and branch from the dropdown menus.
 	4. Click *Upload*.
 
