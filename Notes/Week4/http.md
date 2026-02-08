@@ -65,6 +65,8 @@ The status code is one of the first pieces of information the client will look f
 
 - ✅ `200 OK`: Everything went well! 😊
 - 📝 `201 Created`: The resource was successfully created! 😊
+- 🔀 `301 Moved Permanently`:The resource has been permanently moved to a new URL
+- ↪️ `302 Found`: temporary redirects
 - ❌ `400 Bad Request`: Something about the request was invalid.
 - 🙅‍♀️ `403 Forbidden`: You requested a resource which you’re not allowed to access.
 - 🤷‍♂️ `404 Not Found`: The resource your requested doesn’t exist.

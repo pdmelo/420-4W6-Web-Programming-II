@@ -33,25 +33,24 @@
 
 - [Object Relational Mapping](Notes/Week3/orm.md)
 
+**Week 4**
+
+- [HTTP](Notes/Week4/http.md)
+
 **Guides**
 
 - [Environment Setup](Guides/environment-setup.md)
+
 - [Debugging](Guides/debugging.md)
 - [Logging and Documentation](Guides/logging.md)
 - [Testing](Guides/testing.md)
 - [TypeScript](Guides/typescript.md)
 - [Type Guards](Guides/type-guards.md)
 - [PostresSQL](Guides/database.md)
-
 <!--
-
-
-**Week 4**
-
-- [HTTP](Notes/Week4/http.md)
-- [2.1 HTTP Exercise](Notes/Week4/21-http.md)
-
 **Week 5**
+- [2.1 HTTP Exercise](Notes/Week4/21-http.md)
+- [Error Handling Server Side](Guides/error-handling.md)
 
 - [Routing](Notes/Week5/routing.md)
 - [2.2 Routing Exercise](Notes/Week5/22-routing.md)
