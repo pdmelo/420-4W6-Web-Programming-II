@@ -12,7 +12,7 @@
 
 1. Using the terminal, navigate to your `~/web-ii/exercises/` folder.
 
-2. Go to [the repository for this exercise](https://github.com/JAC-CS-Web-Programming-II-W25/E2.1-HTTP-Template) and click `Code -> 📋` to copy the URL.
+2. Go to [the repository for this exercise](https://github.com/JAC-CS-Web-Programming-II-W26/E2.1-HTTP-Template) and click `Code -> 📋` to copy the URL.
 
    ![Clone Repo](../../images/2.1-githttp.png)
 
