@@ -177,7 +177,7 @@ Earlier this week we played the [HTTP Card Game](https://docs.google.com/present
        const urlParts = req.url.split('/');    
        const pokemonId = parseInt(urlParts[2]);
        
-       const foundPokemon = database.find(pokemon => pokemon.id === pokemonId);
+       const foundPokemon:Pokemon | undefined = database.find(pokemon => pokemon.id === pokemonId);
        
        if (foundPokemon) {
            res.statusCode = 200;        
