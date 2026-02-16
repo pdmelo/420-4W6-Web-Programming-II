@@ -15,7 +15,7 @@
 - No, HTTP is just a protocol that enables communication between clients (like     web browsers) and servers.
 
 ## Example : express.js-Node.js
-```const express = require('express');
+```ts
 const app = express();
 
 // Router handling
@@ -28,7 +28,7 @@ app.post('/login', (req, res) => {
     res.send('Logging in...');
 });
 
-app.listen(3000, () => console.log('Server running on port 3000'));```
+app.listen(3000, () => console.log('Server running on port 3000'));
 
 ```
 

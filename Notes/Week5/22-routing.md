@@ -38,6 +38,10 @@
   - **Path:** The part of the address like `/pokemon` or `/messages`. These patterns may have dynamic parts to match data in a route (ex: `/pokemon/:id`)
   - **Handler Function:** The actual code snippet executing the logic needed: fetching data, updating something, showing the correct page!
 
+![Request Structure](../../images/2.2-router.png)
+
+![client-router](../../images/assn2-controller.png)
+
 ## 🚦 Let’s Go
 
 ### Part 1: Refactoring with Functions
