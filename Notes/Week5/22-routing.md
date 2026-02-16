@@ -11,7 +11,7 @@
 ## 🔨 Setup
 
 1. Using the terminal, navigate to your `~/web-ii/exercises/` folder.
-2. Go to [the repository for this exercise](https://github.com/JAC-CS-Web-Programming-II-W25/E2.2-Routing-Template) and click `Code -> 📋` to copy the URL.
+2. Go to [the repository for this exercise](https://github.com/JAC-CS-Web-Programming-II-W26/E2.2-Routing-Template) and click `Code -> 📋` to copy the URL.
 3. Clone the Git repo from the CLI `git clone <paste URL from GitHub>` (without the angle brackets) or using a GUI client like [GitHub Desktop](https://desktop.github.com/).
 
 - You may have to use the `HTTPS` or `SSH` URL to clone depending on your settings. If one doesn’t work, try the other by clicking `Use SSH` or `Use HTTPS` above the 📋, and copy the new URL.
@@ -26,7 +26,7 @@
 
 > [!Note]
 >
-> Since this exercise builds off the [previous](https://pdmelo.github.io/4W6-Winter-2025/#/Notes/Week4/21-http/), it’s imperative that you complete that one first before moving ahead.
+> Since this exercise builds off the [previous](https://pdmelo.github.io/420-4W6-Web-Programming-II/#/Notes/Week4/21-http), it’s imperative that you complete that one first before moving ahead.
 
 - **Navigating the Web:** When you type a website address (URL) into your browser, your web app needs to figure out which part of its code ‘owns’ this request to generate the response you see.
 
