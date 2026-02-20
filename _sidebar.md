@@ -12,6 +12,7 @@
 **Assignments**
 
 - [1-Models](Assignments/1-models.md)
+- [2-Controllers](Assignments/2-controllers.md)
 
 **Week 1**
 
