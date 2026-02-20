@@ -1,7 +1,7 @@
 # 2 - Controllers
 
 - 💯 **Worth**: 7%
-- 📅 **Due**: March 15, 2025 @ 23:59
+- 📅 **Due**: March 09, 2026 @ 2:00
 - 🚫 **Penalty**: Late submissions lose 10% per day to a maximum of 3 days. Nothing is accepted after 3 days and a grade of 0% will be given.
 
 ## 🎯 Objectives
@@ -14,7 +14,7 @@
 
 ## 🔨 Setup
 
-1. [Click here](https://classroom.github.com/a/izRhndQP) to join the Git classroom.
+1. [Click here](https://classroom.github.com/a/I1jYOLDJ ) to join the Git classroom.
 2. Clone (do not download as a zip) the starter repository from GitHub. Make sure you use the link to fork the proper repository.
 3. Make sure Docker Desktop is open.
 4. Start the development container in VS Code by using the `Dev Containers: Open Folder in Container...` command from the Command Palette (CTRL/CMD+SHIFT+P) and select the cloned directory.
@@ -32,11 +32,11 @@
 
 To complete this assignment, you should be familiar with the following concepts and theories:
 
-- **[MVC Architecture](https://pdmelo.github.io/4W6-Winter-2025/#/Notes/Week2/mvc)**: Understanding the role of the **Controller** in the MVC (Model-View-Controller) pattern.
-- **[TypeScript](https://pdmelo.github.io/4W6-Winter-2025/#/Guides/typescript)**: Knowledge of basic TypeScript syntax and type system, as well as more intermediate concepts such as *partial types* and *index signatures*.
-- **[HTTP](https://pdmelo.github.io/4W6-Winter-2025/#/Notes/Week4/21-http)**: Knowledge of HTTP responses, setting status codes, headers, and a JSON payload.
-- **[Routing](https://pdmelo.github.io/4W6-Winter-2025/#/Notes/Week4/22-routing)**: Register route handler functions within the router to establish the association between URL patterns and actions.
-- **[Testing with Jest](https://pdmelo.github.io/4W6-Winter-2025/#/Guides/testing)**: Familiarity with Jest and how to run tests for TypeScript applications.
+- **[MVC Architecture](https://pdmelo.github.io/420-4W6-Web-Programming-II/#/Notes/Week2/mvc)**: Understanding the role of the **Controller** in the MVC (Model-View-Controller) pattern.
+- **[TypeScript](https://pdmelo.github.io/420-4W6-Web-Programming-II/#/Guides/typescript)**: Knowledge of basic TypeScript syntax and type system, as well as more intermediate concepts such as *partial types* and *index signatures*.
+- **[HTTP](https://pdmelo.github.io/420-4W6-Web-Programming-II/#/Notes/Week4/21-http)**: Knowledge of HTTP responses, setting status codes, headers, and a JSON payload.
+- **[Routing](https://pdmelo.github.io/420-4W6-Web-Programming-II/#/Notes/Week5/22-routing)**: Register route handler functions within the router to establish the association between URL patterns and actions.
+- **[Testing with Jest](https://pdmelo.github.io/420-4W6-Web-Programming-II/#/Guides/testing)**: Familiarity with Jest and how to run tests for TypeScript applications.
 
 > [!Caution]
 >
@@ -235,6 +235,6 @@ git commit -m "Completed Todo controller implementation."
 git push
 ```
 3. Submit your assignment on Gradescope.
-        1. Go to Gradescope, log in, and click the link for this assignment.
-        2. Select the correct repository and branch from the dropdown menus. 
-        3. Click *Upload*.
+      1. Go to Gradescope, log in, and click the link for this [assignment](https://www.gradescope.ca/courses/35557/assignments/180552).
+      2. Select the correct repository and branch from the dropdown menus. 
+      3. Click *Upload*.
