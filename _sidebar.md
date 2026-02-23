@@ -44,6 +44,11 @@
 - [Routing](Notes/Week5/routing.md)
 - [2.2 Routing Exercise](Notes/Week5/22-routing.md)
 
+**Week 6**
+
+- [Jest Unit Testing](Notes/Week6/jesttesting.md)
+- [2.3 Jest UT Exercise](Notes/Week6/23testing.md)
+
 **Guides**
 
 - [cURL](Guides/curl.md)
