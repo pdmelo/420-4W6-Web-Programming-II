@@ -9,7 +9,7 @@
 ## 🔨 Setup
 
 1. Using the terminal, navigate to your `~/web-ii/exercises/` folder.
-2. Go to [the repository for this exercise](https://github.com/JAC-CS-Web-Programming-II-W25/E2.3-Jest-Template) and click `Code -> 📋` to copy the URL.
+2. Go to [the repository for this exercise](https://github.com/JAC-CS-Web-Programming-II-W26/E2.3-Jest-Template) and click `Code -> 📋` to copy the URL.
 3. Clone the Git repo from the CLI `git clone <paste URL from GitHub>` (without the angle brackets) or using a GUI client like [GitHub Desktop](https://desktop.github.com/).
 
    - You may have to use the `HTTPS` or `SSH` URL to clone depending on your settings. If one doesn’t work, try the other by clicking `Use SSH` or `Use HTTPS` above the 📋, and copy the new URL.
@@ -49,8 +49,9 @@ Create a new file in the `tests` folder `tests/app.test.ts`
 **import the method form the application that we need to test**
 copy the following code to create a teste suite using describe and set the stage for testing using beforeEach:
 
-```
-import { fetchPokemon, createPokemon, database } from "../src/app";
+```ts
+import { fetchPokemon, createPokemon} from "../src/app";
+//dont forget to import database from the right source
 
 describe("Pokemon CRUD Operations", () => {
 ///* Make sure the database is empty before each test.  This runs before each test.  See https://jestjs.io/docs/api */
@@ -81,8 +82,8 @@ Consult https://jestjs.io/docs/expect to see methods you can use to check result
 
 Example :unit test for a successful call to addPokemon below.
 
-```
-import { fetchPokemon, createPokemon, database } from "../src/app";
+```ts
+// Write your imports here
 
 describe("Pokemon CRUD Operations", () => {
 ///* Make sure the database is empty before each test.  This runs before each test.  See https://jestjs.io/docs/api */
@@ -108,7 +109,7 @@ describe("Pokemon CRUD Operations", () => {
 
 Run the test:
 
-```
+```bash
 npm test
 ```
 
@@ -147,7 +148,7 @@ export async function fetchPokemonWithError(): Promise<never> { {
 
 #### 2. Test for the rejection case
 
-```
+```ts
 import { fetchPokemonWithError } from "../src/app";
 
 test("fetchPokemonWithError throws an error", async () => {
@@ -157,7 +158,7 @@ test("fetchPokemonWithError throws an error", async () => {
 
 Run the test:
 
-```
+```bash
 npm test
 ```
 
