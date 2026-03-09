@@ -11,7 +11,7 @@
 ## 🔨 Setup
 
 1. Open your terminal and navigate to your `~/web-ii/exercises/` directory.
-1. Go to the [repository for this exercise](https://github.com/JAC-CS-Web-Programming-II-W25/E2.5-MongoDB-Template) and click `Code -> 📋` to copy the URL:
+1. Go to the [repository for this exercise](https://github.com/JAC-CS-Web-Programming-II-W26/E2.5-MongoDB-Template) and click `Code -> 📋` to copy the URL:
 
 ```bash
 git clone <paste URL here>

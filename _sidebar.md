@@ -49,6 +49,12 @@
 - [Jest Unit Testing](Notes/Week6/jesttesting.md)
 - [2.3 Jest UT Exercise](Notes/Week6/23testing.md)
 
+**Week 7**
+
+- [2.4 Express](Notes/Week7/24-express.md)
+- [MongoDB](Notes/Week7/mongodb.md)
+- [2.5 MongoDB Exercise](Notes/Week7/25-mongodb.md)
+
 **Guides**
 
 - [cURL](Guides/curl.md)
@@ -62,17 +68,6 @@
 - [Type Guards](Guides/type-guards.md)
 
 <!--
-
-**Week 6**
-
-- [Jest Unit Testing](Notes/Week6/jesttesting.md)
-- [2.3 Jest UT Exercise](Notes/Week6/23testing.md)
-
-**Week 7**
-
-- [2.4 Express](Notes/Week7/24-express.md)
-- [MongoDB](Notes/Week7/mongodb.md)
-- [2.5 MongoDB Exercise](Notes/Week7/25-mongodb.md)
 
 **Week 8**
 

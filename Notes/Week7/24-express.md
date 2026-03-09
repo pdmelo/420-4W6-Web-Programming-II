@@ -16,7 +16,7 @@
    cd ~/web-ii/exercises/
    ```
 
-2. Go to [the repository for this exercise](https://github.com/JAC-CS-Web-Programming-II-W25/E2.4-Express-Template) and click `Code -> 📋` to copy the URL.
+2. Go to [the repository for this exercise](https://github.com/JAC-CS-Web-Programming-II-W26/E2.4-Express-Template) and click `Code -> 📋` to copy the URL.
 
    ```bash
    git clone <paste URL from GitHub>
@@ -52,7 +52,7 @@ Express Router:
 
 We will separate the server starter from all routing information.
 
-1. Create a new file `server.ts` .This starts the server and initializes the express router.This file serves as the entry point of the application, setting up routes, middleware, and starting the server.
+1. Create a new file `server.ts`  in the `src` folder.This starts the server and initializes the express router.This file serves as the entry point of the application, setting up routes, middleware, and starting the server.
 
    `app.use(express.json())`: This is built-in Middleware provided by Express.It parses incoming JSON requests, allowing the server to handle JSON payloads.
 
@@ -72,20 +72,22 @@ We will separate the server starter from all routing information.
    ```typescript
    import express from "express";
    import pokemonRouter from "./router";
-   import { getHome } from "./controller"; // ideally should not be in the controller.
-
+   
+   
    const app = express();
    const port = 3000;
-
+   
    // Middleware to parse incoming JSON requests
    app.use(express.json());
-
+   
    /**
     * Home route
     * Responds with a welcome message when the root URL is accessed.
     */
-   app.get("/", getHome);
-
+   app.get("/", (req, res) => {
+   	res.status(200).json({ message: "Hello from the Pokemon Server!" });
+   });
+   
    app.use("/pokemon", pokemonRouter);
    /**
     * Starts the Express server and listens on the specified port.
@@ -145,7 +147,7 @@ The http module is replaced with express. Most of the code from the previous exe
 - Directly accesses req.body instead of manually collecting chunks.
 
 ```typescript
-import { Request, Response } from "express";
+  import { Request, Response } from "express";
 ```
 Consider using 
 - `req.body`, dont have to convert to string, becuase the middleware does it for you .
@@ -154,16 +156,17 @@ Consider using
 
 -  `req.query` to extract filters example: 
 	
-	````typescript
+```typescript
 	const { type, sortBy, order } = req.query;
-	
+```
+
 -  You don't need to use `res.send` nor set the headers. Please make time to read more about the **Request** and **Response** components of Express. For example for getAll
    
-   ```typescript
+```typescript
     res.status(200).json({ message: "All Pokemon", payload: newDatabase });
-   ```
-   
-   
+```
+
+
 ---
 
 ### **Testing**
