@@ -48,21 +48,22 @@ export async function initDB() {
 	try {
 		const url = `mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PWD}@${process.env.MONGO_HOST}/`;
 
-		// Initialize MongoDB client
-		client = new MongoClient(url);
-		await client.connect();
-		console.log("Connected to MongoDb");
+		 // Only create a client if it doesn't exist
+        if (!client) {
+            client = new MongoClient(url);
+            await client.connect();
+            console.log("Connected to MongoDB");
+        }
 
 		const db = client.db(DATABASE_NAME);
 
 	} catch (err) {
 		if (err instanceof MongoError) {
 			console.error("MongoDB connection failed:", err.message);
-			throw err;
 		} else {
 			console.error("Unexpected error:", err);
-			throw err;
 		}
+        throw err;
 	}
 }
 ```
@@ -71,17 +72,17 @@ export async function initDB() {
 
 ```typescript
        // Get the list of existing collections in the database
-   		const collections = await db.listCollections().toArray();
-   		const collectionNames = collections.map((col) => col.name);
-   
-   		// Create "pokemon" collection if it does not exist
-   		if (!collectionNames.includes("Pokemon")) {
-   			console.log('Creating "pokemon" collection...');
-   			await db.createCollection("pokemon");
-   		}
-   
-   		// Reference to the "pokemon" collection
-   		pokemonCollection = db.collection("pokemon");       
+		const collections = await db.listCollections().toArray();
+		const collectionNames = collections.map((col) => col.name);
+
+		// Create "pokemon" collection if it does not exist
+		if (!collectionNames.includes("pokemon")) {
+			console.log('Creating "pokemon" collection...');
+			await db.createCollection("pokemon");
+		}
+
+		// Reference to the "pokemon" collection
+		pokemonCollection = db.collection("pokemon");   
 ```
 
 3. Now that we have a collection , we will add the initial document if doesn't already exist. This step can be omitted or data could be added directly using curl.
@@ -95,11 +96,14 @@ export async function initDB() {
    			await pokemonCollection.insertMany(database);
    		}
 ```
-4. Add a  new function to return the document.
+4. Update the getAll function to return the document.
 
 ```typescript
-	export async function getAll(): Promise<Collection<Pokemon> | undefined> {
-	return pokemonCollection;
+export async function getAll(): Promise<Pokemon[]> {
+	if (!pokemonCollection) {
+		throw new Error("Database not initialized. Call initDB() first.");
+	}
+	return await pokemonCollection.find().toArray();
 }
 ```
 -----
@@ -125,24 +129,17 @@ export async function initDB() {
 
 
 ```typescript
-const pokemonCollection = await getAll();
+const pokemon = await getAll();
 ```
 3. Send appropriate response back to server 
 
 ```typescript
-if (pokemonCollection) {
-		const pokemon = await pokemonCollection.find().toArray(); // Fetch pokemons as an array
 			
 		res.status(200).json({
 			success: "Pokemon Collection Found",
 			pokemon,
 			});
-} else {
-			res.status(500).json({
-				success: false,
-				message: "Pokemon Collection does not exists",
-			});
-		}
+
 ```
 
 
@@ -150,27 +147,19 @@ if (pokemonCollection) {
 4. Then add a try-catch block to capture an internal Server error
 
 ```typescript
-   try {
-   		const pokemonCollection = await getAll(); // Get collection
-   		if (pokemonCollection) {
-   			const pokemon = await pokemonCollection.find().toArray(); // Fetch pokemons as an array
-   			//console.log(pokemon);
-   			res.status(200).json({
-   				success: "Pokemon Collection Found",
-   				pokemon,
-   			});
-   		} else {
-   			res.status(500).json({
-   				success: false,
-   				message: "Pokemon Collection does not exists",
-   			});
-   		}
-   	} catch (error) {
-   		res.status(500).json({
-   			success: false,
-   			message: "Internal server error",
-   		});
-   	}
+  try {
+		const pokemon = await getAll(); // Get collection
+
+		res.status(200).json({
+			success: true,
+			pokemon,
+		});
+	} catch (error) {
+		res.status(500).json({
+			success: false,
+			message: "Internal server error",
+		});
+	}
 ```
 ----
 ### Part 3: Updating the Server engine with express router.
@@ -179,8 +168,23 @@ if (pokemonCollection) {
 
 ```typescript
    import { initDB } from "./model";
+   ...
    
-   initDB();
+   async function startServer() {
+	 try {
+		await initDB(); // Wait for MongoDB connection
+		console.log(" Database initialized");
+		app.listen(port, () => {
+			//The server (app.listen) does not start until the DB connection is successful.
+			console.log(`Server running at http://localhost:${port}/`);
+		});
+	 } catch (err) {
+		console.error(" Failed to start server:", err);
+		process.exit(1); // Exit if DB fails
+	 }
+    }
+
+   startServer();
 ```
    - Start the server by running `npm run server`
    - Try it!  On a separate Terminal window
@@ -188,6 +192,7 @@ if (pokemonCollection) {
 ```bash
     curl -v http://localhost:3000/pokemon
 ```
+
 ----
 ### Part 4: Expanding our Pokemon API
 1. **GET One Pokemon**
@@ -195,12 +200,14 @@ if (pokemonCollection) {
     Update `getOne` function in `model.ts`. Pay attention to the Promise return type. Look up the findOne [method](https://www.mongodb.com/docs/manual/reference/method/) to understand the query. The id which is returned as a string from the request is converted to the MongoDB object. `ObjectId` is function in MongoDB that is already imported in the `model.ts` file.
 
   ```typescript
-  export async function getOne(id: string): Promise<Pokemon | undefined> {
-  	const pokemon = await pokemonCollection?.findOne({ _id: new ObjectId(id) });
-  	//pokemonCollection? (Optional Chaining) If pokemonCollection is undefined, findOne() will not run, and the function will return undefined.
-  	return pokemon!;
+  export async function getOne(id: string): Promise<Pokemon | null> {
+      //check first of pokemonCollection exist , through appropriate error
+  	
+  	return await pokemonCollection?.findOne({ _id: new ObjectId(id) });
   }
   ```
+
+
 **controller.ts**
 
 Update the `getOnePokemon` function to call the `getOne` function from the `model.ts`. Return appropriate server responses. Use Try - catch block to have clear server responses.

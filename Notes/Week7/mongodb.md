@@ -77,7 +77,7 @@ MongoDB - [Unstructured-data](https://www.mongodb.com/unstructured-data)
 
 ##  ⚙️MongoDB Operations
 MongoDb offers a variety of queries that support CRUD operations.  These are similar in capability to MySQL operations, but the details/syntax are quite different.
-- [Usage Example](https://www.mongodb.com/docs/drivers/node/current/usage-examples)
+- [Usage Example](https://www.mongodb.com/docs/drivers/node/current/crud/query/retrieve/)
 - [Collection](https://mongodb.github.io/node-mongodb-native/4.13/classes/Collection.html)
 
 ### Common operations include:
