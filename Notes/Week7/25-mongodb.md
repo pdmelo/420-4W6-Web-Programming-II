@@ -55,7 +55,7 @@ export async function initDB() {
             console.log("Connected to MongoDB");
         }
 
-		const db = client.db(DATABASE_NAME);
+		const db = client.db(process.env.MONGO_DB);
 
 	} catch (err) {
 		if (err instanceof MongoError) {
@@ -201,7 +201,7 @@ const pokemon = await getAll();
 
   ```typescript
   export async function getOne(id: string): Promise<Pokemon | null> {
-      //check first of pokemonCollection exist , through appropriate error
+      //check first of pokemonCollection exist , throw appropriate error
   	
   	return await pokemonCollection?.findOne({ _id: new ObjectId(id) });
   }
