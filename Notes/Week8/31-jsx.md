@@ -11,7 +11,7 @@
 ## 🔨 Setup
 
 1. Using the terminal, navigate to your `~/web-ii/exercises/` folder.
-2. Go to [the repository for this exercise](https://github.com/JAC-CS-Web-Programming-II-W25/E3-React-Template) and click `Code -> 📋` to copy the URL.
+2. Go to [the repository for this exercise](https://github.com/JAC-CS-Web-Programming-II-W26/E3.0-React-Template) and click `Code -> 📋` to copy the URL.
 3. Clone the Git repo from the CLI `git clone <paste URL from GitHub>` (without the angle brackets) or using a GUI client like [GitHub Desktop](https://desktop.github.com/).
    - You may have to use the `HTTPS` or `SSH` URL to clone depending on your settings. If one doesn’t work, try the other by clicking `Use SSH` or `Use HTTPS` above the 📋, and copy the new URL.
 4. Rename the cloned folder to `~/web-ii/exercises/3-react/`.
@@ -21,18 +21,18 @@
 8. In the terminal of VS Code, hit the `+` icon to open a new terminal instance. Run `ls` to make sure you’re in the root directory of the exercise and you see `client` and `server` folders.
 9. cd to `client` to run `npm run dev` to start the react server.
 
-## Part 1: Understanding the JSX Syntax
+## Part 1: Understanding the TSX Syntax
 
 The `App.jsx` is the entry point to the React application.
 
-### **1. Declaring a Variable and Using JSX**
+### **1. Declaring a Variable and Using TSX**
 
-1. Open `src/App.jsx`and and declare a variable `name` with a value and replace the h1 html tag, see example below:
+1. Open `client/src/App.tsx`and and declare a variable `name` with a value and replace the h1 html tag, see example below:
 
-```jsx
+```tsx
 import React from "react";
 
-function App = () => {
+function App = {
   const name = "Pokemons!";
   return (
     <div>
@@ -46,7 +46,7 @@ export default App;
 
 2. You can also embed styles in the html, lets make the name italics and add colour to it.
 
-   ```jsx
+   ```tsx
    <h1>
      Meet the <i style={{ color: "SteelBlue" }}>{name}</i>
    </h1>
@@ -56,7 +56,7 @@ export default App;
    > The **double curly brackets** on the style:
    >
    > - {color:"SteelBlue"} is a javascript object
-   > - JSX requires an extra set of `{}` to embed JavaScript expressions. hence the {{color:"SteelBlue"}}
+   > - TSX requires an extra set of `{}` to embed JavaScript expressions. hence the {{color:"SteelBlue"}}
 
 3. Adding other html tags like a button
 
@@ -66,7 +66,7 @@ export default App;
    </button>
    ```
 
-   **Key Points:**
+__Key Points:__
 
 - JSX allows embedding JavaScript expressions within curly braces `{}`.
 - It’s used to render HTML-like elements inside the JavaScript code.
@@ -92,7 +92,7 @@ class Welcome extends React.Component {
 
 Now, replace the `<h1>` tag in the `App()` function with the Component class, delete the previous `name`declaration:
 
-```
+```tsx
 <Welcome name="Pokemons" />
 ```
 
@@ -117,7 +117,7 @@ Update your `App` function to include both components:
 return (
   <div className="container">
     <article>
-      <hgroup>
+     
         <Welcome name="Pokemons" />
         <Greeting name="Pikachu" />
         <p>
@@ -126,7 +126,7 @@ return (
           Together, we embark on <b>countless adventures</b> and face every
           challenge that comes our way.
         </p>
-      </hgroup>
+     
       <button onClick={() => alert("Hi there")}>Click Me</button>
     </article>
   </div>
@@ -142,14 +142,18 @@ return (
 
 ## Part 3 Sending multiple props.
 
-```jsx
-<Greeting name={name} color={color} />
+```tsx
+<Greeting name="Alice" color="blue" />
 ```
 
 In the `Greeting` function component access the props as follows:
 
-```jsx
-function Greeting(props) {
+```tsx
+type GreetingProps = {
+  name: string;
+  color: string;
+};
+function Greeting(props: GreetingProps) {
   return (
     <h1 style={{ color: props.color }}>
       Hello <i>{props.name}</i>{" "}
@@ -162,7 +166,7 @@ function Greeting(props) {
 
 ### 1. **Without using a component.**
 
-Modify `App.jsx` to render a list of Pokemons
+Modify `App.tsx` to render a list of Pokemons
 
 Declare an array `myPokemons` with some values. Display the `myPokemons` array in your App component using the .map() function to render the list directly inside JSX.
 
@@ -201,9 +205,9 @@ Declare a component function called `PokemonList`, call it in the `App` function
 
 ## Part 5 Separating Components into Files.
 
-1. Create a `components` folder in the `src` folder . Add a new file `Greeting.jsx`
+1. Create a `components` folder in the `src` folder . Add a new file `Greeting.tsx`
 
-```jsx
+```tsx
 export default function Greeting(props) {
   return (
     <h1>
@@ -269,11 +273,9 @@ Call the `MainHeader` component in the `App.jsx`. The return should look like th
 return (
 		<div className="container">
 			<article>
-				<hgroup>
 					<div>
 						<MainHeader />
 					</div>
-				</hgroup>
 
 				<PokemonList pokemons={myPokemons} />
 

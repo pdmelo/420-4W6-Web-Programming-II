@@ -106,7 +106,7 @@ function Greeting({ name }) {
 ## ⚙️ React Core Concepts
 - **[Virtual DOM](#the-virtual-dom):** Efficient rendering
 - **[Components](#components):** Reusable UI building blocks.
-- **[JSX](#jsx):** Combines JavaScript and HTML-like syntax.
+- **[TSX](#tsx):** combines TypeScript and JSX( JavaScript +html), letting you write HTML-like UI elements with full type safety..
 - **[State & Props](#props-and-state):** Manage dynamic data..
 - **[Hooks](#hooks):** Modern way to handle state and side effects.
 
@@ -172,30 +172,54 @@ Both components simply return an `<h2>` element with a greeting message.
 
 ------
 
-### JSX
+### TSX
 
-- A **syntax extension** for JavaScript  that allows writing UI elements using an HTML-like syntax.
-- **Not a template language**—Transpiled by Babel to standard JS.
-- React doesn’t require using JSX, but most people find it helpful as a visual aid when working with UI inside the JavaScript code.
+- A **syntax extension**  lets you write UI elements in TypeScript using an HTML-like syntax, making it easier to build interfaces while keeping the benefits of TypeScript.
 
-  - Each JSX element is just syntactic sugar for calling `React.createElement`(component, props, ...children). 
+- **Not a template language** — TSX is **transpiled by Babel or TypeScript** into standard JavaScript/React calls (`React.createElement`).
 
-  - So, anything you can do with JSX can also be done with just plain JavaScript.
+  **Type-safe** — TSX allows you to define **types for props and state**, so your editor can catch errors before the app runs.
 
-- However, JSX is closer to JavaScript than HTML and uses **camelCase** naming convention for HTML attribute names, plus a few other differences **className** (instead of class)
+- - React doesn’t require TSX, but using it makes the UI **easier to read, maintain, and understand**.
 
-- The **style** attribute accepts a JavaScript object with **camelCased** properties rather than a CSS string. 
-  
-- `dangerouslySetInnerHTML` is React’s replacement for using innerHTML
+  > In short: **TSX = JSX + TypeScript types**, which means HTML-like code in TypeScript with type safety.
 
-Example:
+#### How TSX Works
 
-**With JSX**
+Every TSX element is just shorthand for a JavaScript call:
+```typescript
+React.createElement(component, props, ...children)
+```
 
-```jsx
-const Greeting = () => {
-  return <h2>Hello from JSX!</h2>;
+Anything you can do in TSX can also be done with plain JavaScript—but TSX is **cleaner and easier to read**.
+
+**Some key differences from HTML:**
+
+- Attribute names use **camelCase**:
+
+  - `className` instead of `class`
+  - `htmlFor` instead of `for`
+
+- `style` uses a **JavaScript object** instead of a CSS string:
+
+  ```typescript
+  <div style={{ backgroundColor: "blue", fontSize: "16px" }} />
+  ```
+
+- Use `dangerouslySetInnerHTML` instead of `innerHTML`.
+
+**Examples**:
+
+TSX with typed props:
+
+```tsx
+type AppProps = {
+  name: string;
 };
+
+function Greeting({ name }: AppProps) {
+  return <h1>Hello, {name}!</h1>;
+}
 
 export default Greeting;
 
@@ -204,38 +228,37 @@ export default Greeting;
 **Traditional JavaScript (without JSX):**
 
 ```js
-import React from "react";
-
 const Greeting = () => {
-  return React.createElement("h2", null, "Hello from createElement!");
+  return <h2>Hello!</h2>;
 };
 
 export default Greeting;
 
 ```
 
-JSX makes code more readable and maintainable!
+TSX is shorter, more readable, and type-safe .
 
-**Without JSX**, you have to use `React.createElement`, which is more verbose.
+#### **Comments in TSX**
 
-JSX is transformed into `React.createElement` behind the scenes by Babel.
-
-#### **Comments in JSX**
-
-```jsx
+```tsx
 <div>
-  {/* Comment goes here */}
+  {/* Single-line comment */}
   Hello, {name}!
 </div>
 
 <div>
-  {/* It also works 
-  for multi-line comments. */}
+  {/*  Multi-line comment
+    works too. */}
   Hello, {name}! 
 </div>
 ```
 
+✅ **Key Points **
 
+- `.tsx` files = **TypeScript + JSX** (type-safe).
+- `.jsx` files = **JavaScript + JSX** (no types).
+- TSX makes UI code **easy to read, maintain, and type-safe**.
+- It’s just a **shortcut for `React.createElement`** with extra TypeScript benefits.
 
 ------
 
@@ -250,23 +273,46 @@ JSX is transformed into `React.createElement` behind the scenes by Babel.
 **Example (Without Destructuring):**
 
 ```tsx
-const Greeting = (props) => {
+type GreetingProps = {
+  name: string;
+};
+
+const Greeting = (props: GreetingProps) => {
   return <h1>Hello, {props.name}!</h1>;
 };
+
+export default Greeting;
 ```
 
 **Example (With Destructuring):**
 
-```jsx
-const Greeting = ({ name }) => {
+```tsx
+type GreetingProps = {
+  name: string;
+};
+
+const Greeting = ({ name }: GreetingProps) => {
   return <h1>Hello, {name}!</h1>;
 };
+
+export default Greeting;
 ```
 
 **Usage:**
 
 ```tsx
-<Greeting name="Alice" />
+import Greeting from "./Greeting";
+
+function App() {
+  return (
+    <div>
+      <Greeting name="Alice" />
+      <Greeting name="Bob" />
+    </div>
+  );
+}
+
+export default App;
 ```
 
 
@@ -275,41 +321,58 @@ const Greeting = ({ name }) => {
 
 - **❌ Trying to Modify Props (Incorrect)**
 
-```jsx
-const Greeting = ({ name }) => {
-  name = "Bob"; // ❌ This will NOT work! Props are read-only.
+```tsx
+type GreetingProps = {
+  name: string;
+};
+
+const Greeting = ({ name }: GreetingProps) => {
+  // name = "Bob"; // ❌ This will NOT work! Props are read-only.
   return <h1>Hello, {name}!</h1>;
 };
 
-<Greeting name="Alice" />; // Expected "Hello, Alice!" but trying to modify it causes an error.
+export default Greeting;
 ```
 
-👉 **This will cause an error or unexpected behaviour because props cannot be changed.**
+👉 **Trying to modify `name` inside the component will cause a TypeScript error..**
 
 
 
 - **Using State for Mutable Data**
   - If you need to change the data, use **state** instead of modifying props:
 
-```jsx
-    import { useState } from "react";
-    
-    const Greeting = ({ initialName }) => {
-      const [name, setName] = useState(initialName); // ✅ Using state for mutable data
-    
-      return (
-        <div>
-          <h1>Hello, {name}!</h1>
-          <button onClick={() => setName("Bob")}>Change Name</button>
-        </div>
-      );
-    };
-    
-    <Greeting initialName="Alice" />;
+```tsx
+import { useState } from "react";
+
+type GreetingProps = {
+  initialName: string;
+};
+
+const Greeting = ({ initialName }: GreetingProps) => {
+  //  Using state for mutable data
+  const [name, setName] = useState<string>(initialName);
+
+  return (
+    <div>
+      <h1>Hello, {name}!</h1>
+      <button onClick={() => setName("Bob")}>Change Name</button>
+    </div>
+  );
+};
+
+export default Greeting;
     
 ```
 👉 Here, initialName is a prop (immutable), but we store it in useState to make it mutable.
 Now clicking the button updates the name without modifying the original prop.
+
+**Usage**
+
+```tsx
+<Greeting initialName="Alice" />;
+// Initially displays: "Hello, Alice!"
+// Clicking the button changes it to "Hello, Bob!"
+```
 
 ------
 
@@ -327,7 +390,9 @@ Now clicking the button updates the name without modifying the original prop.
 import { useState } from 'react';
 
 const Counter = () => {
-  const [count, setCount] = useState(0);
+  //const [count, setCount] = useState(0); //TypeScript infers count is a number from useState(0)
+  const [count, setCount] = useState<number>(0);  
+    
   return (
     <div>
       <p>Count: {count}</p>
@@ -335,62 +400,10 @@ const Counter = () => {
     </div>
   );
 };
+export default Counter;
 ```
 ----
-### Hooks
 
-A **Hook** is a special function in React that lets you "hook into" React features like state and lifecycle methods inside functional components. Hooks were introduced in React 16.8 to allow functional components to manage state and side effects, replacing the need for class components in many cases.
-
-Before Hooks, state and lifecycle methods were only available in class components. Functional components were stateless and could only receive props. Hooks allow functional components to:
-
-- Manage state (useState)
-- Perform side effects (useEffect)
-- Access context (useContext)
-- Manage refs (useRef)
-- And much more!
-
-### **Rules of Hooks**
-
-When using Hooks, follow these two rules:<br>
- 1️⃣ **Only call Hooks at the top level** (not inside loops, conditions, or nested functions).<br>
- 2️⃣ **Only call Hooks inside React function components** or **custom Hooks**.
-
-
-
-### **Types of Hooks in React**
-
-📌 **State Management Hooks**
-
-- `useState` – Manage component state
-- `useReducer` – Alternative to `useState` for complex logic
-
-📌 **Side Effects & Lifecycle Hooks**
-
-- `useEffect` – Perform side effects (fetching data, DOM manipulation, etc.)
-
-📌 **Context & Performance Hooks**
-
-- `useContext` – Access global state (like themes, authentication)
-- `useMemo` – Optimize performance by memorizing values
-- `useCallback` – Memorize functions to prevent unnecessary re-renders
-
-📌 **Refs & DOM Interaction Hooks**
-
-- `useRef` – Access/manipulate DOM elements
-- `useImperativeHandle` – Expose specific methods from child components
-
-📌 **Custom Hooks**
- You can create **your own Hooks** by combining existing ones to reuse logic across components.
-
-
-
-### **When to Use Hooks?**
-
-- When you need **state** in a functional component.
-- When you want to perform **side effects** like API calls, timers, or event listeners.
-- When you need to share **logic** between components using **custom hooks**.
-
------
 
 
 ### Developer Tools
