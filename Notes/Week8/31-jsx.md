@@ -80,10 +80,11 @@ React components can be defined in multiple ways. Let's explore two common metho
 A React component can be created using a class. The class name should start with an uppercase letter and extend `React.Component`
 
 ```jsx
+type AppProps = {
+	name: string;
+};
+
 class Welcome extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     return <h1>Meet my {this.props.name}</h1>;
   }
@@ -100,9 +101,9 @@ Now, replace the `<h1>` tag in the `App()` function with the Component class, de
 
 Functional components are simpler and more commonly used in modern React:
 
-```jsx
+```tsx
 function Greeting(props) {
-  return <h1>Hello {props.name}</h1>;
+  return <h2>Hello {props.name}</h2>;
 }
 ```
 
@@ -115,9 +116,7 @@ Update your `App` function to include both components:
 
 ```jsx
 return (
-  <div className="container">
-    <article>
-     
+  <div className="card">
         <Welcome name="Pokemons" />
         <Greeting name="Pikachu" />
         <p>
@@ -128,7 +127,7 @@ return (
         </p>
      
       <button onClick={() => alert("Hi there")}>Click Me</button>
-    </article>
+   
   </div>
 );
 ```
@@ -155,14 +154,14 @@ type GreetingProps = {
 };
 function Greeting(props: GreetingProps) {
   return (
-    <h1 style={{ color: props.color }}>
+    <h2 style={{ color: props.color }}>
       Hello <i>{props.name}</i>{" "}
-    </h1>
+    </h2>
   );
 }
 ```
 
-## Part 4: Working with Lists and JSX
+## Part 4: Working with Lists and TSX
 
 ### 1. **Without using a component.**
 
@@ -170,7 +169,7 @@ Modify `App.tsx` to render a list of Pokemons
 
 Declare an array `myPokemons` with some values. Display the `myPokemons` array in your App component using the .map() function to render the list directly inside JSX.
 
-```jsx
+```tsx
 <ul>
   {myPokemons.map((pokemon, index) => (
     <li key={index}>{pokemon}</li>
@@ -184,16 +183,16 @@ Declare an array `myPokemons` with some values. Display the `myPokemons` array i
 
 You could render a `Greeting` component for each name.
 
-```jsx
+```tsx
 <ul>
 			  {myPokemons.map((pokemon, index) => (
-					<li key={index}><Welcome {pokemon}/></li>
+					<li key={index}><Greeting {pokemon}/></li>
 				))}
 			</ul>
 ```
 
 > [!Note]
-> The curly brackets {} in JSX are used to embed JavaScript expressions inside JSX.JSX allows you to mix HTML-like syntax with JavaScript, but JavaScript expressions must be wrapped in {} inside JSX.
+> The curly brackets {} in JSX are used to embed JavaScript expressions inside JSX.JSX allows you to mix HTML-like syntax with JavaScript, but JavaScript expressions must be wrapped in {} inside TSX.
 
 ### 2. **Using a Component.** [TODO]
 
@@ -219,7 +218,7 @@ export default function Greeting(props) {
 
 2. Import it in `App.jsx`:
 
-```jsx
+```tsx
 import Greeting from "./components/Greeting";
 ```
 
@@ -269,10 +268,10 @@ export default MainHeader;
 
 Call the `MainHeader` component in the `App.jsx`. The return should look like this. Make sure to import the appropriate components.
 
-```jsx
+```tsx
 return (
-		<div className="container">
-			<article>
+		<div className="card">
+			
 					<div>
 						<MainHeader />
 					</div>
@@ -280,7 +279,7 @@ return (
 				<PokemonList pokemons={myPokemons} />
 
 				<button onClick={() => alert("Hi there")}>Click Me</button>
-			</article>
+			
 		</div>
 	);
 ```
