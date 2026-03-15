@@ -4,7 +4,6 @@
 - [Proposal Example](project/example-proposal.md)
 - [Specifications](project/specifications.md)
 
-- [2-Controllers](Assignments/2-controllers.md)
 - [3-Views](Assignments/3-views.md)
 - [4-Auth](Assignments/4-auth.md)
  -->
@@ -55,6 +54,11 @@
 - [MongoDB](Notes/Week7/mongodb.md)
 - [2.5 MongoDB Exercise](Notes/Week7/25-mongodb.md)
 
+**Week 8**
+
+- [React](Notes/Week8/react.md)
+- [3.1 JSX Exercise](Notes/Week8/31-jsx.md)
+
 **Guides**
 
 - [cURL](Guides/curl.md)
@@ -63,16 +67,12 @@
 - [Debugging](Guides/debugging.md)
 - [Logging and Documentation](Guides/logging.md)
 - [PostresSQL](Guides/database.md)
+- [REST API](Guides/restapi.md)
 - [Testing](Guides/testing.md)
 - [TypeScript](Guides/typescript.md)
 - [Type Guards](Guides/type-guards.md)
 
 <!--
-
-**Week 8**
-
-- [React](Notes/Week8/react.md)
-- [3.1 JSX Exercise](Notes/Week8/31-jsx.md)
 
 **Week 9**
 
