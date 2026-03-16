@@ -1,8 +1,8 @@
-# 🛤️3.1 JSX Exercise
+# 🛤️3.1 TSX Exercise
 
 ## 🎯 Objectives
 
-1. **Understand** the basics of jsx syntax in a React application using React .
+1. **Understand** the basics of tsx syntax in a React application using React .
 
 2. **Create** Single pages and display content.
 
@@ -23,7 +23,7 @@
 
 ## Part 1: Understanding the TSX Syntax
 
-The `App.jsx` is the entry point to the React application.
+The `App.tsx` is the entry point to the React application.
 
 ### **1. Declaring a Variable and Using TSX**
 
@@ -60,15 +60,15 @@ export default App;
 
 3. Adding other html tags like a button
 
-   ```jsx
+   ```tsx
    <button className="outline" onClick={() => alert("Hi there")}>
      Click Me
    </button>
    ```
 
-__Key Points:__
+**Key Points:**
 
-- JSX allows embedding JavaScript expressions within curly braces `{}`.
+- TSX allows embedding JavaScript expressions within curly braces `{}`.
 - It’s used to render HTML-like elements inside the JavaScript code.
 
 ## Part 2: Creating Reusable Components
@@ -79,9 +79,9 @@ React components can be defined in multiple ways. Let's explore two common metho
 
 A React component can be created using a class. The class name should start with an uppercase letter and extend `React.Component`
 
-```jsx
+```tsx
 type AppProps = {
-	name: string;
+  name: string;
 };
 
 class Welcome extends React.Component {
@@ -114,20 +114,19 @@ function Greeting(props) {
 
 Update your `App` function to include both components:
 
-```jsx
+```tsx
 return (
   <div className="card">
-        <Welcome name="Pokemons" />
-        <Greeting name="Pikachu" />
-        <p>
-          Each with <b>unique abilities </b> and personalities.
-          <br />
-          Together, we embark on <b>countless adventures</b> and face every
-          challenge that comes our way.
-        </p>
-     
-      <button onClick={() => alert("Hi there")}>Click Me</button>
-   
+    <Welcome name="Pokemons" />
+    <Greeting name="Pikachu" />
+    <p>
+      Each with <b>unique abilities </b> and personalities.
+      <br />
+      Together, we embark on <b>countless adventures</b> and face every
+      challenge that comes our way.
+    </p>
+
+    <button onClick={() => alert("Hi there")}>Click Me</button>
   </div>
 );
 ```
@@ -196,10 +195,17 @@ You could render a `Greeting` component for each name.
 
 ### 2. **Using a Component.** [TODO]
 
-Declare a component function called `PokemonList`, call it in the `App` function
+Declare a component function called `PokemonList`, call it in the `App` function. Print each pokemon in thenew component, then render it to Apptsx
 
-```jsx
+```tsx
 <PokemonList pokemons={myPokemons} />
+
+//where myPOkemons is 
+const myPokemonsObjects = [
+	{ id: 1, name: "Pikachu" },
+ 	{ id: 2, name: "Charmander" },
+	{ id: 3, name: "Bulbasaur" },
+ ];
 ```
 
 ## Part 5 Separating Components into Files.
@@ -207,16 +213,21 @@ Declare a component function called `PokemonList`, call it in the `App` function
 1. Create a `components` folder in the `src` folder . Add a new file `Greeting.tsx`
 
 ```tsx
-export default function Greeting(props) {
+type GreetingProps = {
+	name: string;
+	color: string;
+};
+
+export default function Greeting({ name, color }: GreetingProps) {
   return (
     <h1>
-      Hello <i>{props.name}</i>
+      Hello <i>{name}</i>
     </h1>
   );
 }
 ```
 
-2. Import it in `App.jsx`:
+2. Import it in `App.tsx`:
 
 ```tsx
 import Greeting from "./components/Greeting";
@@ -230,63 +241,54 @@ We can compose [multiple components](https://zhenyong.github.io/react/docs/multi
 
 - Create a new `HeaderBody` component in a separate file.
 
-  ```jsx
+  ```tsx
   export default function HeaderBody() {
-  	return (
-  		<>
-  			<p>
-  				My friend has <b>powers</b>
-  			</p>
-  			<br />
-  		</>
-  	);
+    return (
+      <>
+        <p>
+          Your <b>electric powers</b> are electrifying!
+        </p>
+        <br />
+      </>
+    );
   }
   ```
 
-  
-
 - Create a new `MainHeader` component in a separate file.
 
-```jsx
+```tsx
 import Greeting from "./Greeting";
 import HeaderBody from "./HeaderBody";
 
 function MainHeader() {
-	const name = "Pikachu";
-	const color = "SteelBlue";
-	return (
-		<>
-			<Greeting name={name} color={color} />
-			<HeaderBody />
-		</>
-	);
+  const name = "Pikachu";
+  const color = "SteelBlue";
+  return (
+    <>
+      <Greeting name={name} color={color} />
+      <HeaderBody />
+    </>
+  );
 }
 
 export default MainHeader;
-
 ```
 
-Call the `MainHeader` component in the `App.jsx`. The return should look like this. Make sure to import the appropriate components.
+Call the `MainHeader` component in the `App.tsx`. The return should look like this. Make sure to import the appropriate components.
 
 ```tsx
 return (
-		<div className="card">
-			
-					<div>
-						<MainHeader />
-					</div>
+  <div className="card">
+    <div>
+      <MainHeader />
+    </div>
 
-				<PokemonList pokemons={myPokemons} />
+    <PokemonList pokemons={myPokemons} />
 
-				<button onClick={() => alert("Hi there")}>Click Me</button>
-			
-		</div>
-	);
+    <button onClick={() => alert("Hi there")}>Click Me</button>
+  </div>
+);
 ```
-
-
-
-
 
 ## 📥 Submission
 

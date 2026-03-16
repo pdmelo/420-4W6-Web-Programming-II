@@ -57,7 +57,8 @@
 **Week 8**
 
 - [React](Notes/Week8/react.md)
-- [3.1 JSX Exercise](Notes/Week8/31-jsx.md)
+- [3.1 TSX Exercise](Notes/Week8/31-tsx.md)
+- [3.2 useState Exercise](Notes/Week9/32-usestate.md)
 
 **Guides**
 
