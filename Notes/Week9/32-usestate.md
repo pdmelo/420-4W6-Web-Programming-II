@@ -9,8 +9,9 @@
 
 ## 🔨 Setup
 
-1. We will continue using the same folder as the last exercise `3-react` .
-2. Start Docker Desktop
+1. We will continue using the same [template](https://github.com/JAC-CS-Web-Programming-II-W26/E3.0-React-Template)   as the last exercise. 
+2. Rename the cloned folder to ` ~/web-ii/exercises/3.2-react/`
+3. Start Docker Desktop
 3. All Our dependencies are already installed.
 4. In VS Code, hit `CMD/CTRL + SHIFT + P` and search + run `dev container: open folder in container`.
 5. In the terminal of VS Code, hit the `+` icon to open a new terminal instance
@@ -80,7 +81,7 @@ Modify `App.jsx` to include state management.
    
      return (
        <div className="container">
-         <h1>Counter: {count}</h1>
+         <h2>Counter: {count}</h2>
          <button onClick={() => setCount(count + 1)}>Increase</button>
          <button onClick={() => setCount(count - 1)}>Decrease</button>
        </div>
@@ -97,7 +98,7 @@ Modify `App.jsx` to include state management.
    - **Buttons** – Clicking them updates the state, causing React to re-render the component with the new count.
 
 **Example 2 : Changing a HTML element**
-Add a toggle function to change the colour of the text to red if blue, and vice versa. Watch the change using Inspect on the browser.
+Add a toggle function to change the color of the text to red if blue, and vice versa. Watch the change using Inspect on the browser.
 
    ```jsx
    import { useState } from "react";
@@ -108,7 +109,7 @@ Add a toggle function to change the colour of the text to red if blue, and vice 
      return (
        <div>
         <h1 style={{ color: color }}>Meet my {props.name}</h1>
-         <button onClick={() => setColor(color === "blue" ? "red" : "blue")}>
+         <button onClick={() => setColor(color === "green" ? "red" : "green")}>
 				Toggle Colour
 			</button>
        </div>
@@ -124,19 +125,24 @@ Add a toggle function to change the colour of the text to red if blue, and vice 
 >[!NOTE]
 >`color === "blue" ? "red" : "blue"` **can be extracted into a separate function:**
 > 
-	 ```jsx
-	 const toggle = (color) => {
-	 return color === "blue" ? "red" : "blue";
+```tsx
+	 const toggle = () => {
+	 return color === "green" ? "red" : "green";
 	 };
+```
 
->```jsx
+```tsx
+
 // this can then be called using
-	<button onClick={() => setColor( toggle(color) }>
+	<button onClick={() => setColor( toggle() }>
 				Toggle Colour
 	</button>
+```
+
 
 
 ## Part 2: Passing State as Props
+
 We can pass state as **props** to another component.
 
 **Step 1: Create a `Counter` Component**
@@ -240,7 +246,7 @@ export default App;
 
 1. **Without a Component**
 
-Modify `App.jsx` to use `useState` for a **Pokemon list** and update it dynamically.
+Modify `App.tsx` to use `useState` for a **Pokemon list** and update it dynamically.
 
 ```jsx
 import { useState } from "react";
@@ -275,10 +281,10 @@ export default App;
 ##  Part 5 [TODO]
 Make the Pokemon list more dynamic **With a Input Field** 
 
-Modify `App.jsx` to use the **Part 3** to accept a pokemon from the user and add it to the list.
+Modify `App.tsx` to use the **Part 3** to accept a pokemon from the user and add it to the list.
 
 ## Part 6 [TODO]
-Modify App.jsx to include an event listener that changes the background color when a button is clicked.
+Modify App.tsx to include an event listener that changes the background color when a button is clicked.
 
 ## 📥 Submission
 
