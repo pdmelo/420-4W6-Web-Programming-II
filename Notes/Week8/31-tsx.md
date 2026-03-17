@@ -140,6 +140,22 @@ return (
 
 ## Part 3 Sending multiple props.
 
+**Option1** - Inline Type, Used when you sending a single value
+
+```tsx
+function Greeting2({ name }: { name: string }) {
+	return <h2>Hi friend {name}</h2>;
+}
+```
+**Options2** - Props object inline Typing
+
+```tsx
+function Greeting3(props: { name: string }) {
+	return <h2>Hi friend {props.name}</h2>;
+}
+```
+**Option3**  Props using type interface, much cleaner when you have multiple values 
+
 ```tsx
 <Greeting name="Alice" color="blue" />
 ```
@@ -235,7 +251,16 @@ import Greeting from "./components/Greeting";
 
 3. Use the component in the `App()` function as before.
 
-## Part 6 Composing Complex Components.
+## Part 6 - Putting it all together [TODO].
+
+Start a fresh project in VSCode-
+
+Clone the[ react template] [the repository for this exercise](https://github.com/JAC-CS-Web-Programming-II-W26/E3.0-React-Template)- Rename the cloned folder to `~/web-ii/exercises/31-tsx/`.
+Follow the steps from above to run the client. 
+
+**Complete the following steps:**
+
+
 
 We can compose [multiple components](https://zhenyong.github.io/react/docs/multiple-components.html) into a single component.
 
