@@ -9,7 +9,7 @@
 
 ## 🔨 Setup
 
-1. We will continue using the same [template](https://github.com/JAC-CS-Web-Programming-II-W26/E3.0-React-Template)   as the last exercise. 
+1. We will continue using the same [template](https://github.com/JAC-CS-Web-Programming-II-W26/E3.0-React-Template)  as the last exercise. 
 2. Rename the cloned folder to ` ~/web-ii/exercises/3.2-react/`
 3. Start Docker Desktop
 3. All Our dependencies are already installed.
@@ -33,7 +33,7 @@ State can store various types of data, such as:
 - Arrays (e.g., a list of tasks in a to-do app)
 
 ### Types of Hooks in React
- **State Management Hooks**
+**State Management Hooks**
 
 - useState – Manage component state
 
@@ -43,7 +43,6 @@ State can store various types of data, such as:
 **Side Effects & Lifecycle Hooks**
 
 - useEffect – Perform side effects (fetching data, DOM manipulation, etc.)
-
 
 **Context & Performance Hooks**
 
@@ -68,19 +67,19 @@ State can store various types of data, such as:
 
 ## Part 1 : Using `useState` and Dynamic Updates
 **Example 1. Using `useState` for a Counter**
-Modify `App.jsx` to include state management.
+Modify `App.tsx` to include state management.
 
 1. Import `useState` from react.
 
-   ```jsx
+   ```tsx
    import { useState } from "react";
    
    function App() {
      //declare state variable,count starts at 0
-     const [count, setCount] = useState(0);
+     const [count, setCount] = useState<number>(0);
    
      return (
-       <div className="container">
+       <div className="card">
          <h2>Counter: {count}</h2>
          <button onClick={() => setCount(count + 1)}>Increase</button>
          <button onClick={() => setCount(count - 1)}>Decrease</button>
@@ -92,18 +91,19 @@ Modify `App.jsx` to include state management.
    ```
 
 **Key Points:**
+
    - `useState(0)` initializes `count` with a value of `0`.
    - **`count`** – Holds the current state value.
    - `setCount` **updates** the state when buttons are clicked.
    - **Buttons** – Clicking them updates the state, causing React to re-render the component with the new count.
 
 **Example 2 : Changing a HTML element**
-Add a toggle function to change the color of the text to red if blue, and vice versa. Watch the change using Inspect on the browser.
+Create a component `Greeting.tsx`. Add a toggle function to change the color of the text to red if blue, and vice versa. Watch the change using Inspect on the browser.
 
-   ```jsx
+   ```tsx
    import { useState } from "react";
    
-   function Greeting(props) {
+   export deafault function Greeting(props: { name: string; color: string }) {
      const [color, setColor] = useState("green");
 	
      return (
@@ -147,12 +147,12 @@ We can pass state as **props** to another component.
 
 **Step 1: Create a `Counter` Component**
 
-Create a new file `Counter.jsx`. 
+Create a new file `Counter.tsx`. 
 
-```jsx
+```tsx
 import React from "react";
 
-export default function Counter({ count }) {
+export default function Counter({ count }: { count: string }) {
 	return <p>Counter: {count}</p>;
 }
 ```
@@ -160,7 +160,7 @@ export default function Counter({ count }) {
 
 Modify `App.jsx` to pass the state as a prop:
 
-```jsx
+```tsx
 import { useState } from "react";
 import Counter from "./Counter";
 
@@ -168,7 +168,7 @@ function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <div className="container">
+    <div className="card">
       <Counter count={count} />
       <button onClick={() => setCount(count + 1)}>Increase</button>
       <button onClick={() => setCount(count - 1)}>Decrease</button>
@@ -180,9 +180,9 @@ export default App;
 ```
 
 **Key Points:**
-- `App.jsx` **manages the state** (`count`).
+- `App.tsx` **manages the state** (`count`).
 - `Counter`component  **receives** `count` as a prop, using `destructing` in the function, so it can accesses `count` directly instead of using `props.count`
-- State is **controlled in `App.jsx`** but can be displayed anywhere using props.
+- State is **controlled in `App.tsx`** but can be displayed anywhere using props.
 - The curly brackets {} in JSX (count={count}) tell React that count is a JavaScript expression and should be evaluated.
 
 
@@ -192,17 +192,17 @@ Event listeners allow React components to **respond to user actions**, such as c
 
 **Updating State Dynamically with user input**
 
-Modify `App.jsx` to include a text input field that updates a Pokemon’s name.
+Modify `App.tsx` to include a text input field that updates a Pokemon’s name.
 
-```jsx
+```tsx
 import { useState } from "react";
 
 function App() {
-  const [name, setName] = useState("Charmander");
+  const [name, setName] = useState<string>("Charmander");
 
   return (
-    <div className="container">
-      <h1>Meet my Pokemon: {name}</h1>
+    <div className="card">
+      <h3>Meet my Pokemon: {name}</h3>
       <input
         type="text"
         value={name}
@@ -225,7 +225,7 @@ export default App;
 >
 > (e) => setName(e.target.value)  This is a callback function and it could be extracted into its own function within the same component .For example:
 >
-> ```jsx
+> ```tsx
 > const eventhandler = (e) => {
 > 
 > setName(e.target.value)
@@ -235,7 +235,7 @@ export default App;
 >
 > 
 >
-> ```jsx
+> ```tsx
 > <input type="text" value={name} onChange={evenHandler} />
 > ```
 
@@ -248,7 +248,7 @@ export default App;
 
 Modify `App.tsx` to use `useState` for a **Pokemon list** and update it dynamically.
 
-```jsx
+```tsx
 import { useState } from "react";
 
 function App() {
@@ -275,6 +275,7 @@ function App() {
 export default App;
 ```
 **Key Points:**
+
 - `useState` initializes `myPokemons` as an array.
 - Clicking the button adds "Pikachu" to the list.
 
