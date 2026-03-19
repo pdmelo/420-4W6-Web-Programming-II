@@ -16,11 +16,13 @@
 6. Navigate to the client folder.
 7. Start the React server: `npm run dev`.
 
-## Part 1: Understanding `useEffect` in React
+## ⚡Part 1: Understanding `useEffect` in React
 
-The `useEffect` Hook allows you to **perform side effects** in function components.
+The `useEffect` **Hook** allows you to perform **side effects** in functional components.
 
-In React, a **side effect** refers to any operation that affects something outside the function’s scope or lifecycle. This includes things like:
+### What is a Side Effect?
+
+A **side effect** refers to anything that affects something **outside the component**:
 
 - Fetching data from an API
 - Updating the DOM manually
@@ -30,110 +32,148 @@ In React, a **side effect** refers to any operation that affects something outsi
 
 ### Why are Side Effects Important?
 
-- React components should be **pure functions**, meaning they return the same output for the same input without modifying anything outside their scope.
-- However, some operations (like fetching data) **must happen outside the rendering process**—this is where **side effects** come in.
+- React components should be **pure functions**,they should return the same output for the same input.
+- Some operations (like fetching data) **must happen outside the rendering process**— that’s why we use **side effects**.
 
-- `useEffect` is run after the first render and after every update.
+- `useEffect` is runs **after the component renders**.
+  - `After React updates the UI → run this code`
 
-- If `useEffect` returns a function, then that function is treated as a "cleanup" operation that React will call when the component unmounts.
+- - It can optionally **cleanup** effects when the component unmounts.
 
-  - But, since it is run after every render, it also cleans up effects from the previous render before running effects the next time.
+### **How `useEffect` works?**
+
+Use `useEffect` when you need to run code **after the component renders**:
+
+- Runs **after the first render**
+
+  Runs **after every update (by default)**
+
+- Can optionally:
+
+  - Run only once
+  - Run when specific state changes
+  - Clean up after itself
+
 
 ### **When Would You Use `useEffect`?**
 
 - **Fetching data from an API** when a component mounts.
 
-- **Setting up event listeners** (like `window.addEventListener`).
+- **Setting up event listeners** (e.g.`window.addEventListener`).
 
-- **Performing cleanup tasks** (like clearing timers) when a component unmounts.
+- **Performing cleanup tasks** (e.g.  clearing timers) when a component unmounts.
 
-### **🔹`useEffect` Syntax**
+  
 
-#### 🔹Basic Syntax
+## 📝Part 2: Syntax
 
-```jsx
+### **🔹`useEffect` Basic Syntax**
+
+```tsx
 useEffect(() => {
   // Code to run
 });
 ```
 
-👉 The function inside `useEffect` **runs after the component renders**.
+👉 The function inside `useEffect` runs after  **every render**
 
 ---
 
-#### **🔹 `useEffect` with No Dependencies** (Runs on Every Render)
+#### 🔹 1. No Dependency Array  (Runs on Every Render)
+**Syntax**:
 
-```jsx
+```tsx
 useEffect(() => {
   console.log("Component rendered!");
 });
 ```
+🚀**Demo**: - Logs on every render
 
-👉Runs on:
+```tsx
+import { useEffect, useState } from "react";
 
-- Initial mount
-- Every state/prop update
+function App() {
+  const [count, setCount] = useState<number>(0);
+
+  useEffect(() => {
+    console.log("Component rendered!");
+  });
+
+  return (
+    <div>
+      <h1>Counter: {count}</h1>
+      <button onClick={() => setCount(count + 1)}>Increase</button>
+    </div>
+  );
+}
+
+export default App;
+```
+
+✅**Key Points:**
+
+- Watch the Console on the developer tools for ***“Component Mounted”\*** , every time you click on Increase, it will print the “Component Mounted”
+- Clicking the button triggers `useEffect` again.
+
+👉**Runs on:**
+   - Initial mount
+   - Every state/prop update
 
 > [!Caution]
 > Avoid infinite loops! If the effect updates state, it will cause a re-render and repeat infinitely.
+>
+> ⚠️ Infinite Loop Example
+>
+> ```tsx
+> import { useEffect, useState } from "react";
+> 
+> function App() {
+>   const [count, setCount] = useState<number>(0);
+> 
+>   useEffect(() => {
+>     setCount(count + 1); // ❌ updating state
+>   }); // no dependency array
+> 
+>   return <h1>{count}</h1>;
+> }
+> 
+> export default App;
+> ```
+>
+> 💥 **What Happens Step-by-Step**
+>
+> 1. Component renders → `useEffect` runs
+> 2. `setCount(count + 1)` updates state
+> 3. State change → triggers re-render
+> 4. Re-render → `useEffect` runs again
+> 5. Repeat forever… 🔁
+>
+> 👉 Result: **Infinite loop**
 
 ---
 
-#### **🔹 `useEffect` with an Empty Dependency Array** (Runs Once on Mount)
+#### 🔹 2. Empty Dependency Array (Runs Only Once)
 
-```jsx
+**Syntax**:
+
+```tsx
 useEffect(() => {
   // Code to run
 }, []);
 ```
 
-👉**Runs only once** when the component **mounts** (like `componentDidMount` in class components).
+🚀**Demo**: Logs **only once**
 
-- Great for **fetching data** or **event listeners**.
-
----
-
-#### 🔹 `useEffect` with Dependencies\*\* (Runs When Dependencies Change)
-
-```
-useEffect(() => {
-    // Perform appropriate update
-}, [stateVar1, stateVar2]);
-```
-
-👉**Runs only when `StateVar1` or `StateVar2`changes**.
-
-- Useful for watching **specific state or props**.
-
----
-
-#### 🔹 Clean up in `useEffect` (Component Unmounting)
-
-```
-useEffect(() => {
-    // Perform appropriate update
-    return () => {
-       // Perform cleanup operation
-    }
-});
-```
-
----
-
-## Part 2: Using `useEffect` for Logging
-
-**Without dependencies**
-Modify `App.jsx` to log a message when the component mounts.
-
-```jsx
+```tsx
 import { useEffect, useState } from "react";
 
 function App() {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
+    // ✅ This runs only once, when the component mounts
     console.log("Component mounted");
-  }); // with no dependency means it will run on every update.
+  }, []); // empty dependency array ensures it does NOT run on updates
 
   return (
     <div className="container">
@@ -146,86 +186,108 @@ function App() {
 export default App;
 ```
 
-**Key Points:**
+✅**Key Points:**
 
-- Watch the Console on the developer tools for **_"Component Mounted"_** , every time you click on Increase, it will print the "Component Mounted"
-- `useEffect(() => { console.log("Component mounted"); })` runs **everytime there is an update**
-
-#### **With dependencies**
-
-Modify `App.jsx` to log a message when the component mounts.
-
-```jsx
-useEffect(() => {
-  console.log("Component mounted");
-}, []); // run only once when the component mounts
-```
-
-**Key Points:**
-
-- Watch the Console on the developer tools for **_"Component Mounted"_** , there is no update on the Console everytime you click on Increase
-
+- Watch the Console on the developer tools for ***“Component Mounted”\*** , there is no update on the Console every time you click on Increase
 - The empty dependency array `[]` ensures the effect doesn’t run on updates.
-
+- Subsequent updates (like clicking the button) **do not trigger this effect**.
 - `useEffect(() => { console.log("Component mounted"); })` runs **only once when the component mounts**.
+- Perfect for **fetching data** or **adding event listeners**.
 
-> [!Note]
-> Notice the Console loges **_"Component Mounted"_** twice. React's Strict Mode in development causes `useEffect` to execute twice((only in development) ) on mount.Open `main.jsx` to confirm the Strict mode.React unmounts and re-mounts the component immediately, causing your effect to run twice.
+👉**Runs only once** when the component **mounts** 
+>[!Note]
+>💡 React's **Strict Mode** in development may run this effect **twice on mount**, >but this only happens in development.
 
-## Part 3. `useEffect` on Updating on State Change
+---
 
-Modify `App.jsx` so that clicking the button fetches a new Pokémon.
+#### 🔹 3. With Dependencies (Runs on  State/Prop Change)
 
+**Syntax**:
+
+```tsx
+useEffect(() => {
+    // Perform appropriate update
+}, [stateVar1, stateVar2]);
 ```
+
+👉**Runs only when `StateVar1` or `StateVar2`changes**.
+
+🚀**Demo:** - Watching a state change
+
+```tsx
 import { useEffect, useState } from "react";
 
 function App() {
-  const [pokemonId, setPokemonId] = useState(1);
-  const [pokemon, setPokemon] = useState(null);
+  const [count, setCount] = useState<number>(0);
 
   useEffect(() => {
     console.log(`Count changed: ${count}`);
-  }, [count]); // Runs whenever `count` changes
+  }, [count]);
 
-   return (
+  return (
     <div>
       <h2>Count: {count}</h2>
       <button onClick={() => setCount(count + 1)}>Increase</button>
     </div>
   );
 }
-
-export default App;
 ```
 
-**Key Points:**
+👉**Runs** when `count` changes
+
+- Great for reacting to state updates.
+
+- Useful for watching **specific state or props**.
+
+- More useful than just logging
+
+- Useful for watching **specific state or props**.
+
+✅**Key Points**
 
 - `useEffect` runs **whenever** `**count**` **changes**.
-- Clicking the button increments `pokemonId`, triggering a new API request.
-- The UI updates dynamically with the fetched Pokémon.
 
-## Part 4: Fetching Data using `useEffect`
+- Can trigger logic (alerts, API calls, etc.)
 
-1. Create a `json` file `pokemonList.json` in the `public` folder. Add some data for example a list of Pokemons with id , name and type.
-2. Create an new component `FetchData.jsx`.
+  
 
-```jsx
+## 🔄Part 3: Fetching Data with `useEffect`
+
+**Step 1**: **Create a `json`  data** in file `pokemonList.json` in the `public` folder. Add some data for example a list of Pokemons with id , name and type.
+
+```json
+[
+  { "id": 1, "name": "Charmander" },
+  { "id": 2, "name": "Bulbasaur" },
+  { "id": 3, "name": "Squirtle" }
+]
+```
+
+
+
+**Step 2**: Create FetchData Component `FetchData.tsx`.
+
+```tsx
 import { useState, useEffect } from "react";
 import PokemonList from "./PokemonList";
 
-const FetchData = () => {
-  const [pokemon, setPokemon] = useState([]);
+type Pokemon = {
+  id: number;
+  name: string;
+};
 
-  async function fetchPokemon() {
-    const response = await fetch("pokemonList.json");
-    const data = await response.json();
-
-    setPokemon(data);
-  }
+function FetchData() {
+  const [pokemon, setPokemon] = useState<Pokemon[]>([]);
 
   useEffect(() => {
+    async function fetchPokemon() {
+      const response = await fetch("pokemonList.json");
+      const data = await response.json();
+      setPokemon(data);
+    }
+
     fetchPokemon();
-  }, []); //ensure its runs just once
+  }, []);
 
   return (
     <div>
@@ -233,34 +295,61 @@ const FetchData = () => {
       <PokemonList pokemons={pokemon} />
     </div>
   );
-};
+}
 
 export default FetchData;
 ```
 
-3. Update the `PokemonList` to now map an object instead of an array.
+**Step 3:****Update** `PokemonList.tsx` to now map an object instead of an array.
 
-   ```jsx
-   {
-     props.pokemons.map((pokemon) => (
-       <li key={pokemon.id}> {pokemon.name} </li>
-     ));
-   }
-   ```
+```tsx
+type Props = {
+  pokemons: { id: number; name: string }[];
+};
 
-4. Modify `App.jsx` to fetch Pokemon data from `Fetchdata`.
+function PokemonList({ pokemons }: Props) {
+  return (
+    <ul>
+      {pokemons.map((pokemon) => (
+        <li key={pokemon.id}>{pokemon.name}</li>
+      ))}
+    </ul>
+  );
+}
 
-**Key Points:**
+export default PokemonList;
+```
 
-- `fetch("pokemonList.json")` retrieves Pokemon data from a file..
-- `useEffect` runs **once when the component mounts**.
-- The `pokemon` state stores fetched data and is displayed dynamically.
+**Step4:** Modify `App.tsx` to fetch Pokemon data from `Fetchdata`.
 
-## Part 5: cleanup on unmount `useEffect`
+```tsx
+import FetchData from "./FetchData";
 
-1. Create a new component Clock.jsx.
+function App() {
+  return (
+    <div>
+      <h1>My Pokemon List</h1>
+      <FetchData />
+    </div>
+  );
+}
+```
 
-```jsx
+
+
+✅**Key Points:**
+
+- `fetch("pokemonList.json")` retrieves JSON data from a file..
+- `useEffect` rensures fetching **runs only once**.
+- The `pokemon` state  updates dynamically render the list.
+
+
+
+## 🧹Part 4: Cleanup on Unmount 
+
+1. Create a new component `Clock.tsx`.
+
+```tsx
 import { useState, useEffect } from "react";
 
 function Clock() {
@@ -284,7 +373,7 @@ function Clock() {
 export default Clock;
 ```
 
-**Key Points:**
+✅**Key Points:**
 
 1. **Side Effect (`useEffect`)**:
 
@@ -298,38 +387,56 @@ export default Clock;
    - `clearInterval(interval)` stops the interval from running to prevent memory leaks or errors.
    - Without this cleanup, if the component is removed from the UI, the interval would keep running, leading to unwanted side effects
 
-> [!Note] > `clearInterval` is part of the `setInterval/clearInterval` pair in JavaScript.
+> [!Note]  
+> `clearInterval` is part of the `setInterval/clearInterval` pair in JavaScript.
 > `setInterval` is used to repeatedly execute a function after a specified delay (in milliseconds).
 > `clearInterval` is used to stop an interval that was started with `setInterval`.
 
-Modify the `App.jsx` to include the clock component, But first declare a Boolean state, `showClock`. The Clock will be displayed on onclick of a button.
 
+## 🔀🧹Part 5: Conditional Rendering + Cleanup Demo 
+
+Modify the `App.tsx` to include the clock component, But first declare a Boolean state, `showClock`. The Clock will be displayed on onclick of a button. We will use conditional rendering here
+
+
+```tsx
+import { useState } from "react";
+import Clock from "./Clock";
+
+function App() {
+  const [showClock, setShowClock] = useState<boolean>(true);
+
+  return (
+    <div>
+      <button onClick={() => setShowClock(!showClock)}>
+        Toggle Clock
+      </button>
+
+      {showClock && <Clock />}
+    </div>
+  );
+}
 ```
-const [showClock, setShowClock] = useState(true);
-```
 
-We will use conditional rendering here
-
-```jsx
-<div>
-  <button onClick={() => setShowClock(!showClock)}>Toggle Clock</button>
-  {showClock && <Clock />}
-</div>
-```
-
-> [!Note] > **Conditional Rendering in React :**
-> In React, conditional rendering allows us to dynamically render components or elements based on a condition. In the given App function, the component Clock is displayed based on the state variable `showClock`.
+> [!Note]  
+> **Conditional Rendering in React :**
+> Conditional rendering shows/hides components.
 >
-> - If `showClock` is true, <Clock /> is rendered.
+> In the given App function, the component Clock is displayed based on the state variable `showClock`.
+>
+> - If `showClock` is true, <Clock/> is rendered.
 > - If `showClock` is false, React doesn't render anything.
 
 Once you have the clock functioning on the app. Remove the cleanup in the `useEffect`
 
-```jsx
+```tsx
 return () => clearInterval(interval); // remove this line.
 ```
 
-**What Happens When We Click the Button?**
+---
+
+⚠️**What Happens Without Cleanup?**
+
+- What Happens When We Click the Button?
 
 - Initially, the `Clock` is mounted and starts the `setInterval`, updating the time every second.
 
@@ -346,7 +453,16 @@ Now two intervals are running at the same time, updating state twice per second.
 
 If you toggle the component multiple times, intervals keep stacking up, making the clock update multiple times per second.
 
-## Summary
+**In Short**- 
+
+- Timer keeps running in background
+- Multiple timers stack
+- Clock speeds up
+- ❌ Memory leak
+
+
+
+## 🎯Summary
 
 | `useEffect(() => {})`                      | Runs on every render        |
 | ------------------------------------------ | --------------------------- |
@@ -354,11 +470,13 @@ If you toggle the component multiple times, intervals keep stacking up, making t
 | `useEffect(() => {}, [count])`             | Runs when `count` changes   |
 | `useEffect(() => { return () => {} }, [])` | Runs cleanup on unmount     |
 
+
+
 ## 📥 Submission
 
 Take screenshots of:
 
 - The console log showing "Component mounted" when count increases(Without dependencies).
-- The Pokemon data being displayed after fetching.
+- Pokemon data displayed after fetching.
 
 Submit all screenshots on Moodle.

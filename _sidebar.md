@@ -59,6 +59,7 @@
 - [React](Notes/Week8/react.md)
 - [3.1 TSX Exercise](Notes/Week8/31-tsx.md)
 - [3.2 useState Exercise](Notes/Week9/32-usestate.md)
+- [3.3 useEffect Exercise](Notes/Week9/33-useeffect.md)
 
 **Guides**
 
@@ -76,9 +77,6 @@
 <!--
 
 **Week 9**
-
-- [3.2 useState Exercise](Notes/Week9/32-usestate.md)
-- [3.3 useEffect Exercise](Notes/Week9/33-useeffect.md)
 - [3.4 React Router Exercise](Notes/Week9/34-react-router.md)
 
 **Week 11**
