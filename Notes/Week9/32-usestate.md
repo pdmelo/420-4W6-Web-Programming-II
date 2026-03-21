@@ -104,7 +104,7 @@ Create a component `Greeting.tsx`. Add a toggle function to change the color of 
    import { useState } from "react";
    
    export deafault function Greeting(props: { name: string; color: string }) {
-     const [color, setColor] = useState("green");
+     const [color, setColor] = useState<string>("green");
 	
      return (
        <div>
@@ -158,14 +158,14 @@ export default function Counter({ count }: { count: string }) {
 ```
 **Step 2: Use the `Counter` Component in `App.jsx`**
 
-Modify `App.jsx` to pass the state as a prop:
+Modify `App.tsx` to pass the state as a prop:
 
 ```tsx
 import { useState } from "react";
 import Counter from "./Counter";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState<number>(0);
 
   return (
     <div className="card">
@@ -223,14 +223,14 @@ export default App;
 
 > [!NOte]
 >
-> (e) => setName(e.target.value)  This is a callback function and it could be extracted into its own function within the same component .For example:
+> (e) => setName(e.target.value)  This is a callback function and it could be extracted into its own function within the same component . For Tyepscripting you need to state the type for the event object .For example:
 >
 > ```tsx
-> const eventhandler = (e) => {
-> 
-> setName(e.target.value)
-> 
-> };
+> // rememebr to import ChangeEvent from React->
+> //import { useState, ChangeEvent } from "react";
+> function eventHandler(e: ChangeEvent<HTMLInputElement>) {
+> 		setName(e.target.value);
+> 	}
 > ```
 >
 > 

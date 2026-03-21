@@ -1,4 +1,4 @@
-# 🛤️3.3 `useEffect` Hook Exercise
+# 🔄3.3 `useEffect` Hook Exercise
 
 ## 🎯 Objectives
 
@@ -8,13 +8,14 @@
 
 ## 🔨 Setup
 
-1. We will continue using the same folder as the last exercise `3-react`.
-2. Start Docker Desktop.
-3. All our dependencies are already installed.
-4. In VS Code, hit `CMD/CTRL + SHIFT + P` and search + run `dev container: open folder in container`.
-5. In the terminal of VS Code, hit the `+` icon to open a new terminal instance.
-6. Navigate to the client folder.
-7. Start the React server: `npm run dev`.
+1. We will continue using the same [template](https://github.com/JAC-CS-Web-Programming-II-W26/E3.0-React-Template)  as the last exercise. 
+2. Rename the cloned folder to ` ~/web-ii/exercises/3.3-react/` or `~/web-ii/exercises/3.3-useffect/`
+3. Start Docker Desktop.
+4. All our dependencies are already installed.
+5. In VS Code, hit `CMD/CTRL + SHIFT + P` and search + run `dev container: open folder in container`.
+6. In the terminal of VS Code, hit the `+` icon to open a new terminal instance.
+7. Navigate to the client folder.
+8. Start the React server: `npm run dev`.
 
 ## ⚡Part 1: Understanding `useEffect` in React
 
@@ -245,7 +246,7 @@ function App() {
 
 ✅**Key Points**
 
-- `useEffect` runs **whenever** `**count**` **changes**.
+- `useEffect` runs **whenever** `count` **changes**.
 
 - Can trigger logic (alerts, API calls, etc.)
 
@@ -265,7 +266,7 @@ function App() {
 
 
 
-**Step 2**: Create FetchData Component `FetchData.tsx`.
+**Step 2**: **Create** FetchData Component `FetchData.tsx`.
 
 ```tsx
 import { useState, useEffect } from "react";
@@ -300,7 +301,7 @@ function FetchData() {
 export default FetchData;
 ```
 
-**Step 3:****Update** `PokemonList.tsx` to now map an object instead of an array.
+**Step 3:* **Update** `PokemonList.tsx` to now map an object instead of an array.
 
 ```tsx
 type Props = {
@@ -320,7 +321,7 @@ function PokemonList({ pokemons }: Props) {
 export default PokemonList;
 ```
 
-**Step4:** Modify `App.tsx` to fetch Pokemon data from `Fetchdata`.
+**Step4:** **Modify** `App.tsx` to fetch Pokemon data from `Fetchdata`.
 
 ```tsx
 import FetchData from "./FetchData";
