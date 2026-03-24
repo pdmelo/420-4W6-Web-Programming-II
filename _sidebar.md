@@ -12,6 +12,7 @@
 
 - [1-Models](Assignments/1-models.md)
 - [2-Controllers](Assignments/2-controllers.md)
+- [3-Views](Assignments/3-views.md)
 
 **Week 1**
 
