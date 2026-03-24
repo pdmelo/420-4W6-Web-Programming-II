@@ -1,7 +1,7 @@
 # 3-Views
 
 - 💯 **Worth**: 7%
-- 📅 **Due**: April 13, 2025 @ 23:59
+- 📅 **Due**: April 13, 2026 @ 02:00
 - 🚫 **Penalty**: Late submissions lose 10% per day to a maximum of 3 days. Nothing is accepted after 3 days and a grade of 0% will be given.
 
 ## 🎯 Objectives
@@ -15,7 +15,7 @@
 
 ## 🔨 Setup
 
-1. [Click here](https://classroom.github.com/a/3XpAOuHA) to join the Git classroom.
+1. [Click here](https://classroom.github.com/a/lozbqYPe) to join the Git classroom.
 2. Clone (do not download as a zip) the starter repository from GitHub. Make sure you use the link to fork the proper repository.
 3. Make sure Docker Desktop is open.
 4. Start the development container in VS Code by using the `Dev Containers: Open Folder in Container...` command from the Command Palette (CTRL/CMD+SHIFT+P) and select the cloned directory.
@@ -44,6 +44,13 @@ In this assignment, you will be implementing the view layer of your application.
 
 > [!note][Read the Comments]
 > I have left detailed comments in all the components. Please read them and then re-read them to get a solid understanding about what is expected from you. The comments are part of the assignment instructions to help you know what to do. It's up to you to (most importantly for this assignment) understand the relationship between the controller, response, and view .
+>
+> In the `App.tsx` you will see this code ```future={{ v7_startTransition: true }}```
+>
+> 💡 **TL;DR:**
+>  The `future={{ v7_startTransition: true ,v7_relativeSplatPath: true,}}` flag **tells React Router to handle page changes more smoothly**. It’s optional, and your app works fine without it, but turning it on can make navigation feel faster, especially in bigger apps.
+
+
 
 ### Part 1: Create the basic layout of pages.
 
@@ -55,11 +62,11 @@ Example: (You may need to create components and adjust your route as per your de
 
 - `/` → Renders `<Home />`.
 - `/create` → Renders `<CreateTodo />`.
-- `/list-todos` → Displays `<DisplayTodos />`.
+- `/todos-menu` → Renders`<TodosNavigation/>`.
 
 > [!TIP]
 >
-> Read the comments in the `DisplayTodos` component. Create additional components accordingly.
+> Read the comments in the `TodosNavigation` component. Create additional components accordingly.
 
 ### Part 2: Displaying a Single Todo (10%)
 
@@ -79,9 +86,11 @@ Example: (You may need to create components and adjust your route as per your de
 
    - Currently, the existing `TodoController` methods only send JSON responses.
 
-3. **Create the Component:**
+3. **React Components:**
 
-   - Use the component `FindOne.jsx` that receives the `todoId` from the user. This component will then fetch the data from the backend servers.
+   - Update the `TodoSearch.tsx` to include the input html tag to receive a todo id from the user.
+
+   - This will then render component `FetchTodoById.tsx` that receives the `todoId` from the parent component as a prop. This component will then fetch the data from the backend servers.
 
    - Comments are provided in the code to help you guide through.
 
@@ -96,7 +105,7 @@ Example: (You may need to create components and adjust your route as per your de
       */
      const requestOptions = {
        method: "GET",
-       mode: "cors",
+       
      };
 
      const response = await fetch(
@@ -112,11 +121,11 @@ Example: (You may need to create components and adjust your route as per your de
 
    - Store the fetched data in state using `useState`.
 
-   - Render the `ShowView` component when a Todo is found.
+   - Render the `TodoView` component when a Todo is found.
 
-   - Display the Todo using the `ShowView` component.
+   - Display the Todo using the `TodoView` component.
 
-     - In the `ShowView.jsx`, display the `title`, `description`, and `status` of the Todo object passed from `FindOne.jsx`.
+     - In the `TodoView.tsx`, display the `title`, `description`, and `status` of the Todo object passed from `FetchTodoById.tsx`.
      - Structure the HTML to nicely present the Todo information. The organization is totally up to you.
 
    - **Implement Data using `useEffect`:**
@@ -139,10 +148,9 @@ Example: (You may need to create components and adjust your route as per your de
 
    - **User Interface:**
 
-     - **Create the** `**ShowView**` **Component**
-
+     - **Create the** `**TodoView**` **Component**
        - Display the Todo details.
-       - Provide buttons for updating, deleting, and marking the Todo as complete.
+       - Provide buttons for editing, deleting, and marking the Todo as complete.
        - Call the respective functions when buttons are clicked.
 
 4. **Testing:**
@@ -154,6 +162,8 @@ Visit the client URL http://localhost:5173/ to display details of the single tod
 Example:
 
 ![show-todo](../Assignments/images/show-todo.png)
+
+
 
 ### Part 3: Displaying a List of Todos (15%)
 
@@ -167,7 +177,7 @@ Example:
    - Pass the array of Todos
 3. **Create the Component:**
 
-   - Use this component `DisplayAll.jsx`to fetch the data and display it. Since this is the list view, show less detail per Todo item. At the very minimum, the `title` `Description` and `Status` should be displayed.
+   - Use this component `TodoList.tsx`to fetch the data and display it. Since this is the list view, show less detail per Todo item. At the very minimum, the `title` `Description` and `Status` should be displayed.
    - Comments are provided in the code to help you guide through.
 
    - Implement the `getAll` function to fetch all todo using the API.
@@ -181,7 +191,7 @@ Example:
       */
      const requestOptions = {
        method: "GET",
-       mode: "cors",
+       
      };
       
      const response = await fetch(
@@ -204,11 +214,11 @@ Example:
 Example:
 ![Show-Todos](../Assignments/images/show-todos.png) 
 
-**Extra Feature: (Bonus points)**
+**Extra Feature: **
 
 - Each listed todo, should be clickable to display the details of the todo.
 
-### Part 4: Creating a New Todo (25%)
+### Part 4: Creating a New Todo (20%)
 
 **Goal:** Allow users to create new Todos by filling out a form and submitting their input to the server.
 
@@ -219,7 +229,7 @@ Example:
 
 1. **Create the Component:**
 
-   - Create the Template `CreateTodo.jsx`:
+   - Create the Template `CreateTodo.tsx`:
 
    - Inside the following input fields in the component create an HTML.:
      - Title
@@ -229,7 +239,7 @@ Example:
 
 - Display a pop up confirming the creation.
 
-- After a successful creation, you need to redirect the user to the newly created Todo’s ShowView, ex. /todos/newId. ( Look at the notes here for [redirects](https://pdmelo.github.io/420-4W6-Web-Programming-II/#/Notes/Week9/react-router) )
+- After a successful creation, you need to redirect the user to the newly created Todo’s TodoView, ex. /todos/newId. ( Look at the notes here for [redirects](https://pdmelo.github.io/420-4W6-Web-Programming-II/#/Notes/Week9/react-router) )
 
 - If the form data is invalid (missing title or description), then render the **CreateTodo** again with an alert message pop up to let the user know what went wrong.
 - Comments are provided in the code to help you guide through.
@@ -284,11 +294,11 @@ Example:
 
 1. **Modify the Template:**
 
-There are multiple ways to achieve this. I suggest use the `ShowView.jsx` component, to have the `edit`button.
+There are multiple ways to achieve this. I suggest use the `TodoView.tsx` component, to have the `edit`button.
 
-- This should be similar to your `CreateTodo.jsx`, but pre-populated with the existing Todo’s information so that the user can easily make changes.
-- After successfully updating the Todo in the database, you need to redirect the user to the updated Todo’s ShowView, ex. `/todos/:id`.
-- Review the Action handlers in the `FindOne.jsx` and the comments in the `ShowView` components to guide you through the implementation.
+- This should be similar to your `CreateTodo.tsx`, but pre-populated with the existing Todo’s information so that the user can easily make changes.
+- After successfully updating the Todo in the database, you need to redirect the user to the updated Todo’s TodoView, ex. `/todos/:id`.
+- Review the Action handlers in the `FetchTodoById.tsx` and the comments in the `TodoView` components to guide you through the implementation.
 
 2. Controller Logic:
 
@@ -318,11 +328,11 @@ Example:
 </div>
 
 1. **Modify the Template:**
-   - You don’t need to create a new view for this part. Instead, add a button to the `ShowView` that, when clicked will trigger the `markAsComplete` callback in the `FindOne`, which will then send a `PUT` request to `/todos/:id/complete`. Comments in the code.
+   - You don’t need to create a new view for this part. Instead, add a button to the `TodoView` that, when clicked will trigger the `markAsComplete` callback in the `FindOne`, which will then send a `PUT` request to `/todos/:id/complete`. Comments in the code.
    - How will you show that a Todo was completed? Perhaps showing it with a strikethrough? A different colour? Using an icon/image ✅? It’s up to you2.
 2. **Controller Logic:**
 
-   - After successfully updating the Todo in the database in the `PUT /todos/:id/complete` route handler, you need to redirect the user to the updated Todo’s ShowView, ex. `/todos/:id`.
+   - After successfully updating the Todo in the database in the `PUT /todos/:id/complete` route handler, you need to redirect the user to the updated Todo’s TodoView, ex. `/todos/:id`.
 
 3. **Testing:**
 
@@ -331,7 +341,9 @@ Example:
    - Visit http://localhost:3000/todos/ You should see the updated todo in the database or even in the `Show Single Todo` of your application.
    - - Visit the client URL http://localhost:5173/ Display a single Todo or display All to view the update.
 
-### Part 7: Deleting Todos (5%)
+
+
+### Part 7: Deleting Todo (5%)
 
 **Goal:** Allow users to delete a Todo.
 
@@ -342,36 +354,40 @@ Example:
 	</iframe>
 </div>
 
-- By this point you should know the drill. Like in the previous part, add the `delete` button to the `ShowView`. This way, the user can delete a Todo right from the Todo’s page. Onclick will trigger the `onDelete` callback in the `FindOne` component.
+- By this point you should know the drill. Like in the previous part, add the `delete` button to the `TodoView`. This way, the user can delete a Todo right from the Todo’s page. Onclick will trigger the `onDelete` callback in the `FetchTodoById` component.
 
 - once Deleted redirect the use to the List of All Todos
 
-### Part 8: Extra Feature (15%)
+### Part 8: Extra Feature (20%)
 
 Choose ONE of the following to implement. You can choose to implement more than one if you’d like, but you will only receive marks for your best one.
 
 #### Option 1: SubTodos
 
-- Add a form in the `ShowView` to add a SubTodo to the Todo.
+- Add a form in the `TodoView` to add a SubTodo to the Todo.
 
-- List the SubTodos in the `ShowView` below the Todo’s details.
+- List the SubTodos in the `TodoView` below the Todo’s details.
 - Add a mechanism mark each SubTodo to mark it as complete.
 
-#### Option 2: Date Fields and Cancel Button.
+#### Option 2-A: Date Fields and Cancel Button.
 
-1. Add a <input type="date"> to the `CreateTodo` and `ShowView` to allow users to set a due date for their Todos.
-   In the ShowView, display the due date if it’s set, along with the created date and completed date if the Todo was completed.
+1. Add a <input type="date"> to the `CreateTodo` and `TodoView` to allow users to set a due date for their Todos.
+   In the TodoView, display the due date if it’s set, along with the **created date** and c**ompleted date** if the Todo was completed.
 
-On the `ShowView` component or the Edit page,
+On the `TodoView` component or the Edit page,
 
 2. Click on `Cancel`button to cancel the edit, and just show uneditable View of the the Single Todo.
+
 3. In the list all Todos, Each listed item should be clickable to render the details of the todo, i.e the display Single Todo page.,
    > [!TIP]
-   > You will need to define a route for `todo/:id` in your route on `App.jsx`
+   > You will need to define a route for `todo/:id` in your route on `App.tsx`
+   
+4. Completed todo should not show Edit Button nor the mark Complete Button
 
-#### Option 3: Filtering & Sorting
+   
+#### Option 2- B: Filtering & Sorting
 
-Update the `DisplayAll` component to allows users to:
+Update the `TodoList` component to allows users to:
 
 - Filter the list of Todos by status. They should be able to filter by “complete” or “incomplete” status.
 - Sort the list of Todos by title, created date, or due date. They can also pick the order (ascending or descending).
