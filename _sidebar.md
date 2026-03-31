@@ -66,6 +66,11 @@
 
 - [3.4 React Router Exercise](Notes/Week9/34-react-router.md)
 
+**Week 11**
+
+- [Cookies](Notes/Week11/cookies.md)
+- [4.1 Cookies](Notes/Week11/41-cookies.md)
+
 **Guides**
 
 - [cURL](Guides/curl.md)
@@ -81,8 +86,6 @@
 
 <!--
 
-**Week 9**
-- [3.4 React Router Exercise](Notes/Week9/34-react-router.md)
 
 **Week 11**
 
