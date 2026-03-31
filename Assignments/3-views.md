@@ -239,7 +239,7 @@ Example:
 
 - Display a pop up confirming the creation.
 
-- After a successful creation, you need to redirect the user to the newly created Todo’s TodoView, ex. /todos/newId. ( Look at the notes here for [redirects](https://pdmelo.github.io/420-4W6-Web-Programming-II/#/Notes/Week9/react-router) )
+- After a successful creation, you need to redirect the user to the newly created Todo’s TodoView, ex. /todos/newId. ( Look at the notes here for [redirects](https://pdmelo.github.io/420-4W6-Web-Programming-II/#/Notes/Week9/34-react-router) )
 
 - If the form data is invalid (missing title or description), then render the **CreateTodo** again with an alert message pop up to let the user know what went wrong.
 - Comments are provided in the code to help you guide through.
@@ -263,7 +263,7 @@ Example:
     			}),
     		};
     
-    const response = await fetch(`http://localhost:3000/todos/todos`,requestOptions);
+    const response = await fetch(`http://localhost:3000/todos/`,requestOptions);
     
     if (response.ok) {
      alert(`Todo title ${inputField.todo_title} Created!`);
@@ -328,12 +328,11 @@ Example:
 </div>
 
 1. **Modify the Template:**
-   - You don’t need to create a new view for this part. Instead, add a button to the `TodoView` that, when clicked will trigger the `markAsComplete` callback in the `FindOne`, which will then send a `PUT` request to `/todos/:id/complete`. Comments in the code.
+   - You don’t need to create a new view for this part. Instead, add a button to the `TodoView` that, when clicked will trigger the `markAsComplete` callback in the `FetchTodoById`, which will then send a `PUT` request to `/todos/:id/complete`. Comments in the code.
    - How will you show that a Todo was completed? Perhaps showing it with a strikethrough? A different colour? Using an icon/image ✅? It’s up to you2.
 2. **Controller Logic:**
-
    - After successfully updating the Todo in the database in the `PUT /todos/:id/complete` route handler, you need to redirect the user to the updated Todo’s TodoView, ex. `/todos/:id`.
-
+   
 3. **Testing:**
 
    - Visit the client URL http://localhost:5173/ Display a single Todo .
