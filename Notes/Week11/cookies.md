@@ -2,39 +2,77 @@
 
 
 >[!note]
-> All the notes in this section have been taken from the [Wikipedia page about cookies](https://en.wikipedia.org/wiki/HTTP_cookie). If you want an in-depth understand of cookies, then please go ahead and read the page itself. Otherwise, I have picked out the main points from the page that you should understand.
+> These notes are adapted from the [Wikipedia page about cookies](https://en.wikipedia.org/wiki/HTTP_cookie).If you want a deeper understanding, read the full article. Otherwise, this section highlights the **key concepts you must know**.
 
 ---
 
+
+
 ## 🤷‍ What are Cookies?
 
-**Definition:** An HTTP cookie (also called web cookie, Internet cookie, browser cookie, or simply cookie) is a small piece of data stored on the user's computer by the web browser while browsing a website. <br>
+📌**Definition:** 
 
-**Purpose:** 
--  Cookies were designed to be a reliable mechanism for websites to remember stateful information (such as items added in the shopping cart in an online store) or to record the user's browsing activity (including clicking particular buttons, logging in, or recording which pages were visited in the past). 
--  They can also be used to remember pieces of information that the user previously entered into form fields, such as names, addresses, passwords, and payment card numbers.
+An **HTTP cookie** (also called web cookie, Internet cookie, browser cookie, or simply cookie) is a small piece of data stored on the user's computer by the web browser while visiting a website.
 
-**Structure**: 
--  _name_ and _value_
--  cookies can also have one or more _attributes_. 
+🎯 **Purpose**
 
-Browsers do not include cookie attributes in requests to the server; they only send the cookie's name and value. Cookie attributes are used by browsers to determine when to delete a cookie, block a cookie or whether to send a cookie to the server.
+Cookies exist to help websites **remember information between requests** (since HTTP is stateless).
 
+They are commonly used to:
+
+-  🛒 Remember **shopping cart items**
+-  🔐 Keep users **logged in (sessions)**
+-  📄 Store **form inputs** (name, email, etc.)
+-  📊 Track **user activity** (pages visited, clicks)
+
+>[!TIP]
+> Without cookies, every page load would feel like a *brand new visit*.
+
+🧱**Structure**: 
+
+- A cookie consists of:
+
+  - **name**
+  - **value**
+  - optional **attributes** (rules for how/when it works)
+
+Example:
+```
+  sessionId=abc123
+```
+
+>[!CAUTION]
+>Browsers do not include cookie attributes in requests to the server; they only send the ?>cookie's name and value. Cookie attributes are used by browsers to determine when to ?>delete a cookie, block a cookie or whether to send a cookie to the server.
+
+
+---
 ### 🌐 Domain and Path
 
-The _Domain_ and _Path_ attributes define the scope of the cookie. They tell the browser what website the cookie belongs to.
+The _Domain_ and _Path_ attributes define the scope of the cookie, **where the cookie is valid**.. They tell the browser what website the cookie belongs to.
 
-**Rules**: For security reasons, cookies can only be set on the current resource's top domain and its sub domains, and not for another domain and its sub domains. 
+🔐**Rules**: 
 
-**Example** : The website `digimon.com` cannot set a cookie that has a domain of `pokemon.com` because this would allow the `digimon.com` website to control the cookies of `pokemon.com`.
+- A site **can only set cookies for its own domain**
+- It **cannot set cookies for another website**
 
-**Host-only vs. Domain-wide cookies**
+**Example** : 
 
-If a cookie's _Domain_ and _Path_ attributes are not specified by the server, they default to the domain and path of the resource that was requested.ie If no domain is specified, the cookie is only available for the specific host.
+❌ `digimon.com` cannot set cookies for `pokemon.com`
 
-However, in most browsers there is a difference between a cookie set from `pokemon.com` without a domain, and a cookie set with the `pokemon.com` domain. In the former case, the cookie will only be sent for requests to `pokemon.com`, also known as a host-only cookie. In the latter case, all sub domains are also included (for example, `game.pokemon.com` and `tv.pokemon.com`).
+This would allow the `digimon.com` website to control the cookies of `pokemon.com`.
 
-**Example**<br>
+---
+
+ ### 🧭 **Host-only vs. Domain-wide cookies**
+
+If a cookie's _Domain_ and _Path_ attributes are not specified by the server, they default to the domain and path of the resource that was requested i.e. If no domain is specified, the cookie is only available for the specific host.
+
+- **Host-only cookie** → only sent to the exact domain
+- **Domain cookie** → sent to the domain + all subdomains
+
+However, in most browsers there is a difference between a cookie set from `pokemon.com` without a domain, and a cookie set with the `pokemon.com` domain. In the former case, the cookie will only be sent for requests to `pokemon.com`, also known as a **host-only cookie**. In the latter case, all sub domains are also included (for example, `game.pokemon.com` and `tv.pokemon.com`).
+
+**Example**
 Below is an example of some `Set-Cookie` HTTP response headers that are sent from a website after a user logged in. The HTTP request was sent to a webpage within the `game.pokemon.com` subdomain:
 
 ```http
@@ -45,51 +83,107 @@ Set-Cookie: pokemonId=789; Domain=pokemon.com; Path=/; Expires=Wed, 13 Jan 2021 
 …
 ```
 
--   The first cookie, `pokedexId`, has no _Domain_ attribute, and has a _Path_ attribute set to `/pokedex`. This tells the browser to use the cookie only when requesting pages contained in `game.pokemon.com/pokedex`.
--   The other two cookies, `trainerId` and `pokemonId`, would be used when the browser requests any subdomain in `.pokemon.com` on any path (for example `www.pokemon.com/pokedex`).
+- The first cookie, `pokedexId`, has no _Domain_ attribute, and has a _Path_ attribute set to `/pokedex`. This tells the browser to use the cookie only when requesting pages contained in `game.pokemon.com/pokedex`.
+
+- The other two cookies, `trainerId` and `pokemonId`, would be used when the browser requests any subdomain in `.pokemon.com` on any path (for example `www.pokemon.com/pokedex`).
+
+>[!TIP]
+> Think of **Domain** = “which site”
+and **Path** = “which part of the site”
+
+---
 
 ### ⏳ Expires and Max-Age
 
-**Expires**  attribute** defines a specific date and time for when the browser should delete the cookie. The date and time are specified in the form `Wdy, DD Mon YYYY HH:MM:SS GMT`.
+These control **how long a cookie lives**.
 
-**Max-Age** attribute can be used to set the cookie's expiration as an interval of seconds in the future, relative to the time the browser received the cookie. Below is an example of three `Set-Cookie` headers that were received from a website after a user logged in:
+🕒 **Expires** 
+
+- Sets an exact **date & time**. The date and time are specified in the form `Wdy, DD Mon YYYY HH:MM:SS GMT`.
+
+⏱️ **Max-Age**
+
+Sets duration in **seconds from now** 
+
+
+
+### 📌 Types of Cookies
+
+- **Session cookie**
+  - No expiration
+  - Deleted when browser closes
+- **Persistent cookie**
+  - Has `Expires` or `Max-Age`
+  - Stored until that time
+
+Below is an example of three `Set-Cookie` headers that were received from a website after a user logged in:
 
 ```http
 HTTP/1.0 200 OK
-Set-Cookie: pokedexId=123; Expires=Tue, 15 Jan 2023 21:47:38 GMT; Path=/; Domain=.pokemon.com; HttpOnly
 Set-Cookie: trainerId=456; Path=/; Domain=.pokemon.com
+```
+
+➡️ Session cookie (deleted on browser close)
+
+```  http
+HTTP/1.0 200 OK
+Set-Cookie: pokedexId=123; Expires=Tue, 7 April 2026 21:47:38 GMT; Path=/; Domain=.pokemon.com; HttpOnly
+```
+➡️ Persistent cookie
+
+ `pokedexId`, is set to expire sometime on 7 April 2026. It will be used by the client browser until that time
+
+```http
+HTTP/1.0 200 OK
 Set-Cookie: pokemonId=789; Expires=Thu, 01 Jan 1970 00:00:01 GMT; Path=/; Domain=.pokemon.com; HttpOnly
 ```
 
--   The first cookie, `pokedexId`, is set to expire sometime on 15 January 2023. It will be used by the client browser until that time.
--   The second cookie, `trainerId`, does not have an expiration date, making it a session cookie. It will be deleted after the user closes their browser.
--   The third cookie, `pokemonId`, has an expiration time in the past. The browser will delete this cookie right away because its expiration time is in the past.
-    -   Note that cookie will only be deleted if the domain and path attributes in the `Set-Cookie` field match the values used when the cookie was created.
+ `pokemonId`, has an expiration time in the past. The browser will delete this cookie right away because its expiration time is in the past.Note that cookie will only be deleted if the domain and path attributes in the `Set-Cookie` field match the values used when the cookie was created.
+
+>[!TIP]
+>Setting an expiration date in the past deletes the cookie immediately.
+
+---
 
 ### 🔒 Secure and HttpOnly
 
-The **Secure** and **HttpOnly** attributes do not have associated values. Rather, the presence of just their attribute names indicates that their behaviors should be enabled.
+These are **security flags**.
 
-**Secure** attribute
+🔐**Secure** 
 
-- Ensures cookies are only sent over HTTPS.
+- Cookie is sent **only over HTTPS**.
 - Prevents transmission over unsecured connections.
 
 It is meant to keep cookie communication limited to encrypted transmission, directing browsers to use cookies only via secure/encrypted connections. However, if a web server sets a cookie with a secure attribute from a non-secure connection, the cookie can still be intercepted when it is sent to the user by man-in-the-middle attacks. Therefore, for maximum security, cookies with the Secure attribute should only be set over a secure connection.
 
-**HttpOnly** attribute
+🚫**HttpOnly** 
 
-- Prevents access to cookies via JavaScript (reduces XSS attacks).
+- Cookie **cannot be accessed via JavaScript** 
+- Protects against **XSS (Cross-Site Scripting)**
 
 This attribute directs browsers not to expose cookies through channels other than HTTP (and HTTPS) requests. This means that the cookie cannot be accessed via client-side JavaScript, and therefore cannot be stolen easily via cross-site scripting (a pervasive attack technique).
 
+
+
 ## 🤔 Why use Cookies?
 
-### 👥 Session Management
+### 👥 1. Session Management
+
+Used for login systems.
+
+**How it works:**
+
+1. Server creates a **session ID**
+2. Sends it as a cookie
+3. Browser sends it back on every request
+4. Server recognizes the user
 
 One popular use of cookies is for logging into websites. When the user visits a website's login page, the web server typically sends the client a cookie containing a unique session identifier (typically, a long string of random letters and numbers). When the user successfully logs in, the server remembers that that particular session identifier has been authenticated. Because cookies are sent to the server with every request the client makes, that session identifier will be sent back to the server every time the user visits a new page on the website, and the server will grant the user access to its services.
 
-### 💅 Personalization
+### 🎨 2. Personalization
+
+- Save user preferences (theme, language, etc.)
+- Example: dark mode
 
 Cookies can be used to remember information about the user in order to show relevant content to that user over time. For example, a web server might send a cookie containing the username that was last used to log into a website, so that it may be filled in automatically the next time the user logs in.
 
@@ -97,7 +191,14 @@ Many websites use cookies for personalization based on the user's preferences. U
 
 For example, [DuckDuckGo](https://duckduckgo.com/) (the search engine you ought to be using if you care about your privacy) uses cookies to allow users to set the viewing preferences like the colors of the page.
 
-### 🕵️‍♀️ Tracking
+### 🕵️‍♀️ 3. Tracking
+
+Track browsing behavior
+
+Used for:
+
+- analytics
+- advertising
 
 Tracking cookies are used to track users' web browsing habits. This can be demonstrated as follows:
 
@@ -108,6 +209,11 @@ Tracking cookies are used to track users' web browsing habits. This can be demon
 By analyzing this log file, it is then possible to find out which pages the user has visited, in what sequence, and for how long.
 
 Corporations exploit users' web habits by tracking cookies to collect information about buying habits. The Wall Street Journal found that America's top fifty websites installed an average of sixty-four pieces of tracking technology onto computers, resulting in a total of 3,180 tracking files. The data can then be collected and sold to bidding corporations.
+
+>[!Caution]
+>⚠️ This is why cookie consent banners exist (privacy laws like GDPR).
+
+
 
 ## ⚙️ How to use Cookies?
 
@@ -157,6 +263,22 @@ Cookies can also be set by client-side JavaScript that runs within the browser. 
 
 **Example:** `document.cookie = 'temperature=20'` creates a cookie of name "temperature" and value "20".
 
+>[!NOTE]
+>Cannot access cookies with **HttpOnly**
+>Less secure than server-set cookies
+
 ## 🥱 TL;DR
 
 Cookies are arbitrary pieces of data, usually chosen and first sent by the web server, and stored on the client computer by the web browser. The browser then sends them back to the server with every request, introducing states (memory of previous events) into otherwise stateless HTTP transactions. Without cookies, each retrieval of a web page or component of a web page would be an isolated event, largely unrelated to all other page views made by the user on the website. Although cookies are usually set by the web server, they can also be set by the client using a scripting language such as JavaScript (unless the cookie's `HttpOnly` flag is set).
+
+## Final Notes
+
+HTTP is **stateless** → cookies add **state**
+
+Cookies are **key to authentication**
+
+Always think:
+
+- Where is this cookie valid? (**Domain/Path**)
+- How long does it live? (**Expires/Max-Age**)
+- Is it secure? (**Secure/HttpOnly**)
