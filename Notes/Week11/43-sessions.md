@@ -121,17 +121,17 @@ In this exercise, we will implement a basic session system that allows users to 
 
       
 
-1. Lets  Add the following code to the `Home.jsx` component:
+1. Lets  Add the following code to the `Home.tsx` component:
 
-  ```jsx
-  <!-- home.jsx -->
+  ```tsx
+  <!-- home.tsx -->
   <>
   	<input
   	type="text"
   	value={userName}
+      className="loginbutton"    
   	onChange={(e) => setUserName(e.target.value)}
   	placeholder="Enter username"
-  	style={{ marginRight: "8px" }}
   	/>
   
   	<button onClick={handleLogin}>Login</button>
@@ -142,16 +142,15 @@ In this exercise, we will implement a basic session system that allows users to 
   - The form sends a POST request to the `/login` route when submitted.
 
 2. Create a new route to handle this request and wire it to the `login()` controller function. Then, follow the steps inside the `login()` function to allow the user to log in.
-3. Modify `home.jsx` , create a login handler to fetch information from server, to display a welcome message with the user's name if they are logged in by using the `isLoggedIn` and `name` properties of the session object, if they exist.
+3. Modify `home.tsx` , create a login handler to fetch information from server, to display a welcome message with the user's name if they are logged in by using the `isLoggedIn` and `name` properties of the session object, if they exist.
 
 <div style="position:relative; width:100%; height:0px; padding-bottom:62.500%;">
-<iframe allow="fullscreen;autoplay" allowfullscreen height="100%" src="https://pdmelo.github.io/4W6-Winter-2025/images/4.3.2-Sessions.mp4" width="100%" style="border:none; width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden; border-radius: 5px; ">
+<iframe allow="fullscreen;autoplay" allowfullscreen height="100%" src="https://pdmelo.github.io/420-4W6-Web-Programming-II/images/4.3.2-Sessions.mp4" width="100%" style="border:none; width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden; border-radius: 5px; ">
 	</iframe>
 </div>
 
-
-4. Next let's only allow logged-in users to add Pokemon to the database. In the `getAllPokemon()` controller function, follow the steps outlined in the comment to only display the form if the user is logged in.
-    This will also require modifying the `DisplayAll.jsx` template to only display the form if the user is logged in.
+4. Next let's only allow logged-in users to add Pokemon to the database. In the `getAllPokemon()` controller function, follow the steps outlined in the comment to only display the form if the user is logged in.<br>
+	This will also require modifying the `DisplayAll.tsx` template to only display the form if the user is logged in.<br>
 5. To test if the login system is working, start with being logged out. Since everytime the server is restarted it clears all session data, you can simply restart the server to log out. 
 6. Next let's only allow logged-in users to add Pokemon to the database. 
 7. There's a glaring flaw with our design though! Just because there is no form to add Pokemon, doesn't mean a user can't send a POST request to the `/pokemon` route. Try sending a POST request to the `/pokemon` route using [cURL](../../references/curl/#post-requests). You'll notice that you can still add Pokemon to the database even if you're not logged in. To fix this, follow the comment in the `createPokemon()` controller function to only allow logged-in users to add Pokemon.
@@ -194,7 +193,7 @@ curl -v -X POST -H "Content-Type:application/json"  -b "session_id=your-sessionI
 	```
 
 2. Create a new route to handle this request and wire it to the `logout()` controller function. Then, follow the steps inside the `logout()` function to allow the user to log out.
-	- To make the [cookie expire](https://pdmelo.github.io/4W6-Winter-2025/#/Notes/Week11/cookies?id=%e2%8f%b3-expires-and-max-age), set the `Expires` attribute of the `Set-Cookie` header to a date in the past.
+	- To make the [cookie expire](https://pdmelo.github.io/420-4W6-Web-Programming-II/#/Notes/Week11/cookies?id=%e2%8f%b3-expires-and-max-age), set the `Expires` attribute of the `Set-Cookie` header to a date in the past.
 
 	```ts
 	new Date(new Date().getTime() - 5000).toUTCString();
@@ -205,7 +204,7 @@ curl -v -X POST -H "Content-Type:application/json"  -b "session_id=your-sessionI
 3. Verify that the user can be logged out.
 	1. Log in with a name.
 	2. Note the session ID.
-	3. Log out, and check that the session IDis cleared on the browser.
+	3. Log out, and check that the session ID is cleared on the browser.
 
 
 
@@ -215,7 +214,7 @@ To really understand how the new session is being set after logging out, let's w
 |---------|---------------|---------------|-------------|
 | POST `/login`  | `{}` | `{123}` | Client logs in, server redirects to the homepage with session cookie 123. |
 | GET `/` | `{123}` | `{123}` | Client performs the redirect and sends the cookie with the request. Server responds OK with the cookie back. |
-| GET `/logout` | `{123}` | `{---}` | Client logs out, server sets expired cookie, client deletes expired cookie.Client redirect to the logout |
+| POST `/logout` | `{123}` | `{---}` | Client logs out, server sets expired cookie, client deletes expired cookie. Client redirect to the logout component or back to login. |
 
 >[!note]
 >**Key Takeaways**
@@ -230,7 +229,7 @@ To really understand how the new session is being set after logging out, let's w
 When you logged out, you might have noticed that session data is not being cleared. This is because we are only clearing the session ID cookie, not the session data on the server. This means if someone got a hold of the session ID, they could still access the website as if they were logged in.
 
 <div style="position:relative; width:100%; height:0px; padding-bottom:62.500%;">
-<iframe allow="fullscreen;autoplay" allowfullscreen height="100%" src="https://pdmelo.github.io/4W6-Winter-2025/images/4.3.3-Hijacking.mp4" width="100%" style="border:none; width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden; border-radius: 5px; ">
+<iframe allow="fullscreen;autoplay" allowfullscreen height="100%" src="https://pdmelo.github.io/420-4W6-Web-Programming-II/images/4.3.3-Hijacking.mp4" width="100%" style="border:none; width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden; border-radius: 5px; ">
 	</iframe>
 </div>
 
@@ -238,11 +237,21 @@ This phenomenon is known as [**session hijacking**](https://en.wikipedia.org/wik
 
 ## 📥 Submission
 
-Take a screenshot after you log in so that your name is displayed in the welcome message. Make sure to have your browser's dev tools open to the `Application` tab showing the session ID cookie, and the server terminal open on the side showing the session data object.
+1. Take a screenshot after you **log in** so that your name is displayed in the welcome message. Make sure to have your browser's dev tools open to the `Application` tab showing the session ID cookie, and the server terminal open on the side showing the session data object.
+1. Take a screenshot after you **log out** .Clearing all the session data on the server side.
+1. Take a Screen shot of either Display All or create Pokemon, preventing user when not logged in
 
 ![Submission](../../images/4.3.3-Submission.png)
 
-Submit the screenshot on Moodle.
+
+
+
+
+![SubmissionLogout](../../images/4.3.6-SubmissionLogout.png)
+
+![Submission2](../../images/4.3.5-noSessionDisplayAll.png)
+
+Submit the screenshots on Moodle.
 
 ---
 
