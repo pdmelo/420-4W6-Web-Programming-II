@@ -11,14 +11,11 @@
 
 1. Open your terminal and navigate to your ~/web-ii/exercises/ directory
 
-2. Navigate to the [template repository](https://github.com/JAC-CS-Web-Programming-II-W25/E4.3-Sessions-Template)  and click Code -> 📋 to copy the URL:
+2. Navigate to the [template repository](https://github.com/JAC-CS-Web-Programming-II-W26/E4.3-Sessions-Template)  and click Code -> 📋 to copy the URL:
 
    ```bash
    git clone <paste URL here>
    ```
-
-   
-
 3. Rename the cloned folder to `~/web-ii/exercises/4.3-sessions/`
 
 4. Assuming Docker is started, in VS Code, hit `CMD/CTRL + SHIFT + P`, search + run `dev container: open folder in container`, and select the downloaded folder.
@@ -43,49 +40,90 @@ In this exercise, we will implement a basic session system that allows users to 
 
 ### Part 1: 🍪 Basic Sessions
 
-1. Let's first understand the way sessions are implemented in this exercise. Open `sessions.ts` on the server side in the `src` folder.
+1. Let’s start by understanding how sessions are implemented in this exercise.
 
-	```tsx
-	// session.ts
-	interface Session {
-		id: string;
-		data: Record<string, any>;
-	}
+  Open `sessions.ts` on the server side in the `src` folder.
 
-	const sessions: Record<string, Session> = {};
+  ```tsx
+  // session.ts
+  interface Session {
+  	id: string;
+  	data: Record<string, any>;
+  }
+  
+  const sessions: Record<string, Session> = {};
+  
+  const createSession = (): Session => {
+  	return {
+  		id: Math.floor(Math.random() * 1000),
+  		data: {},
+  	};
+  };
+  ```
 
-	const createSession = (): Session => {
-		return {
-			id: Math.floor(Math.random() * 1000),
-			data: {},
-		};
-	};
-	```
+  🔍 What’s happening here?
 
-	- The `Session` interface defines the structure of a session object where we store the session ID and the session data.
-	- The `sessions` object is a dictionary that stores session objects with their IDs as keys. Recall that a _dictionary_ is a collection of key-value pairs which we implement in TypeScript using the [Record type](https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type).
-	- The `createSession()` function generates a new session object with a random ID and an empty data object.
+  - The `Session` **interface** defines the structure of a session object. Each session has:
+    - an `id`
+    - a `data` object (used to store user-specific information)
+  - The `sessions` **object** is a dictionary that stores all session objects.
+    - Each session is stored using its `id` as the key.
+    - Recall: a dictionary is a collection of key-value pairs, implemented in TypeScript using the `Record` type [Record type](https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type).
+  - The `createSession()` **function** generates a new session.
+    - assigns a  random `id` and an empty `data` object.
 
-2. The `getSession()` function retrieves the session object associated with the user's visit to the website. If the user has a session ID cookie, the function retrieves the session object from the `sessions` object using the session ID. If the user does not have a session ID cookie (ex. first login to the site), the function creates a new session object and sets the session ID cookie to the new session's ID.
+  
 
-	```ts
-	// session.ts
-	export const getSession = (req: IncomingMessage) => {
-		const sessionId = getCookies(req)["session_id"];
-		let session: Session | undefined;
-	
-		if (sessionId) {
-			session = sessions[sessionId];
-		}
-	
-		return session;
-	};
-	```
-	
-3. Inside the `getHome()` controller function, follow the steps outlined in the comment. After you retrieve the session object, you can set a session cookie using the `Set-Cookie` response header we learned how to use in [E4.1](/Notes/Week11/41-cookies?id=part-1-🍪-basic-cookies).
-4. Once that's done, refresh the page and verify that there is a cookie with the session ID in the browser's dev tools. Take note of the session ID value.
-5. Refresh the page again and verify that the session ID cookie is still present and has the same value. Also verify that the sessions object is being logged to the terminal on each request.
+2. 🔁 Retrieving a Session
 
+  Now look at the `getSession()` function: 
+
+  ```ts
+  // session.ts
+  export const getSession = (req: IncomingMessage) => {
+  	const sessionId = getCookies(req)["session_id"];
+  	let session: Session | undefined;
+  
+  	if (sessionId) {
+  		session = sessions[sessionId];
+  	}
+  
+  	return session;
+  };
+  ```
+
+ This function attempts to retrieve the session associated with a user’s request.
+
+- The `getSession()` function retrieves the session object associated with the user's request to the website.
+- It:
+  -  Reads the `session_id` cookie from the request
+  - Checks if a session with that ID exists in the `sessions` object
+  - Returns the session if found
+  - If the user has a session ID cookie, the function retrieves the session object from the `sessions` object using the session ID. If the user does not have a session ID cookie (ex. first login to the site), the function creates a new session object and sets the session ID cookie to the new session's ID.
+
+
+👉 If no session cookie exists (for example, on the user’s first visit), a new session should be created and stored.
+
+**🛠️ Your Task**
+
+Inside the **`getHome()` controller function**, follow the steps outlined in the comments:
+
+1. Retrieve the session using `getSession()`
+2.  If no session exists, create one
+3. Set the response status code to `200`
+4. Set a `"Set-Cookie"` header with the session ID. We learned how to do this from  [E4.1](/Notes/Week11/41-cookies?id=part-1-🍪-basic-cookies).
+
+✅ Verify Your Work
+
+After completing the implementation:
+
+- Refresh the page and open your browser’s **DevTools → Application → Cookies**
+  - Confirm that a `session_id` cookie has been created
+  - Take note of its value
+
+- Refresh the page again:
+  - The same `session_id` should still be present (it should not change)
+  - Check your terminal and verify that the `sessions` object is being logged on each request on the server side.
 
 
 ![Session ID cookie](../../images/4.3.1-Session-ID.png)
@@ -100,26 +138,61 @@ In this exercise, we will implement a basic session system that allows users to 
 >5. The session ID is used to retrieve the session data from the server.
 
 
+
 ### Part 2: 🔓 Logging In
 
+Now that we have a working session mechanism in place, let's implement a login system. 
 
-1. Now that we have a working session mechanism in place, let's implement a login system. Note that sessions are normally set in place when a user logins, Sessions are not generated when a page is loaded. 
+>[!Note] 
+>
+>💡 In real applications, sessions are typically created **when a user logs in**, not when a page loads. We’ll update our code to follow this pattern.
 
-1. **Cleanup:**
+#### 🧹 **Step 1: Cleanup**
+
+Before adding login functionality, update your existing code:
+
+- **In the `getHome()` controller:**
+  - Comment out the code from Part 1 that:
+    - retrieves the session
+    - sets the `Set-Cookie` header
+- **In `session.ts`:**
+  - Comment out the code that creates a session inside `getSession()`
+  - Sessions should now only be created during login
+
+```ts
+// else {
+	// 	session = createSession();
+	// 	sessions[session.id] = session;
+	// }
+
+....
+	// if (!session) {
+	// 	throw new Error(
+	// 		"Session not found (you probably need to erase all browser cookies).",
+	// 	);
+	// }
+```
 
 
-   1. In the `gethome()` controller function. Comment out the code added in Part 1. The code that gets the session and sets the Cookie header with the session id.
 
-   1. In the `session.ts `comment out the code that create a new session in the `getSession` function. Now we will create a new session id only when the user logs in.
+####  🔌**Step 2: **: Create the Login Route on the server side
 
-      ```
-      // else {
-      	// 	session = createSession();
-      	// 	sessions[session.id] = session;
-      	// }
-      ```
+- Create a new route on the server: `POST /login`
+- Connect it to the `login()` controller function
 
-      
+Inside `login()`:
+
+1. Create a new session
+2. Store it in the `sessions` object
+3. Add user data to the session (e.g. `name`, `isLoggedIn`)
+4. Set the `Set-Cookie` header with the session ID
+
+
+
+####  🧑‍💻Step 3 **Add a Login Form**
+
+Update the **`Home.tsx`** component:
+
 
 1. Lets  Add the following code to the `Home.tsx` component:
 
@@ -138,22 +211,83 @@ In this exercise, we will implement a basic session system that allows users to 
   </>
   ```
 
-  - The form has a single input field for the user's name and a submit button. Normally we'd have a password field as well, but for simplicity, we're only asking for the user's name.
-  - The form sends a POST request to the `/login` route when submitted.
+  - This form includes:
 
-2. Create a new route to handle this request and wire it to the `login()` controller function. Then, follow the steps inside the `login()` function to allow the user to log in.
-3. Modify `home.tsx` , create a login handler to fetch information from server, to display a welcome message with the user's name if they are logged in by using the `isLoggedIn` and `name` properties of the session object, if they exist.
+    - a single input field for the user’s name
+    - a login button
+    
+- For simplicity, we are not using a password field
+
+- When clicked, the button should trigger a login request ( a POST request to the `/login` route when submitted.)
+
+- Further instructions are provided on the `Home.tsx`
+
+- Review  `FetchHome.tsx` and `App.tsx` and update accordingly to comply with the `Home.tsx`
+
+  
+
+#### 🔄 **Step 4: Handle Login on the Client**
+
+In **`Home.tsx`**:
+
+- Implement the `handleLogin` function:
+  - send a request to `/login`
+  - include the `userName` in the request body
+  - clear the input after login
+- Update the UI:
+  - If the user is logged in, display a welcome message using:
+    - `session.isLoggedIn`
+    - `session.name`
+
+👉 Example:
+
+- Logged in → *“Welcome, Ash!”*
+- Not logged in → show login form
 
 <div style="position:relative; width:100%; height:0px; padding-bottom:62.500%;">
 <iframe allow="fullscreen;autoplay" allowfullscreen height="100%" src="https://pdmelo.github.io/420-4W6-Web-Programming-II/images/4.3.2-Sessions.mp4" width="100%" style="border:none; width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden; border-radius: 5px; ">
 	</iframe>
 </div>
 
-4. Next let's only allow logged-in users to add Pokemon to the database. In the `getAllPokemon()` controller function, follow the steps outlined in the comment to only display the form if the user is logged in.<br>
-	This will also require modifying the `DisplayAll.tsx` template to only display the form if the user is logged in.<br>
-5. To test if the login system is working, start with being logged out. Since everytime the server is restarted it clears all session data, you can simply restart the server to log out. 
-6. Next let's only allow logged-in users to add Pokemon to the database. 
-7. There's a glaring flaw with our design though! Just because there is no form to add Pokemon, doesn't mean a user can't send a POST request to the `/pokemon` route. Try sending a POST request to the `/pokemon` route using [cURL](../../references/curl/#post-requests). You'll notice that you can still add Pokemon to the database even if you're not logged in. To fix this, follow the comment in the `createPokemon()` controller function to only allow logged-in users to add Pokemon.
+#### 🔒 **Step 5: Restrict Access (Frontend)**
+
+Only allow logged-in users to add Pokemon:
+
+Only allow logged-in users to add Pokémon:
+
+- In the **`getAllPokemon()` controller**:
+
+  - Follow the comments to only send the form if the user is logged in
+
+- In **`DisplayAll.tsx`**:
+
+  - Only render the form if the user is logged in
+
+####  🔍**Step 6: Test the Login System**
+
+  - Start while logged out:
+    - Restart the server (this clears all session data)
+  - Log in using the form
+  - Verify:
+    - The session is created
+    - The UI updates correctly
+
+#### ⚠️ **Step 7: Test and Expose a Security Flaw (Bypassing the UI)**
+
+There’s an important issue with our current design: Even  though there is no form to add a Pokemon, users can still send requests manually.
+
+👉 Try this:
+
+- Use  [cURL](../../references/curl/#post-requests)  to send a POST /pokemon request while logged out
+
+- You’ll notice that a Pokémon is still added to the database ❗
+
+Here is curl command example , to verify you can can add new pokemon  when logged in . Make sure you logged in first, and get the session cookie. Then try this command.
+```bash
+curl -v -X POST -H "Content-Type:application/json"  -b "session_id=your-sessionID" -d '{"name":"Meow","type":"Grass"}' http://localhost:3000/pokemon 
+```
+
+To fix this, follow the comment in the `createPokemon()` controller function to only allow logged-in users to add Pokemon.
 
 
 
@@ -161,14 +295,15 @@ In this exercise, we will implement a basic session system that allows users to 
 
 
 
-Here is curl command example , to verify you can can add new pokemon  when logged in . Make sure you logged in first, and get the session cookie. Then try this command.
+#### 🛡️ **Step 8: Fix Authorization on the Server**
 
-```bash
+To fix this:
 
-curl -v -X POST -H "Content-Type:application/json"  -b "session_id=your-sessionID" -d '{"name":"Meow","type":"Grass"}' http://localhost:3000/pokemon 
-```
-
-
+- Go to the **`createPokemon()` controller**
+- Follow the existing comments to:
+  - check if the user is logged in using the session
+  - only allow the request if `isLoggedIn === true`
+  - otherwise, reject the request (e.g. return **401 Unauthorized**)
 
 > [!note]
 > **Key Takeaways**
@@ -183,28 +318,58 @@ curl -v -X POST -H "Content-Type:application/json"  -b "session_id=your-sessionI
 
 ### Part 3: 🔒 Logging Out
 
-1. Implement a logout system by adding a logout button to the `home.jsx`. Display the Logout if logged in .The button should send a GET request to the `/logout` route.
+Now let’s implement a logout system to allow users to end their session.
 
-	```jsx
-	<!-- home.jsx -->
-		<>
-			<button onClick={handleLogout}>Logout</button>
-		</>
-	```
+#### 🔘 **Step 1: Add a Logout Button (Client)**
 
-2. Create a new route to handle this request and wire it to the `logout()` controller function. Then, follow the steps inside the `logout()` function to allow the user to log out.
-	- To make the [cookie expire](https://pdmelo.github.io/420-4W6-Web-Programming-II/#/Notes/Week11/cookies?id=%e2%8f%b3-expires-and-max-age), set the `Expires` attribute of the `Set-Cookie` header to a date in the past.
+Update the **`NavBar.tsx`** component:
 
-	```ts
-	new Date(new Date().getTime() - 5000).toUTCString();
-	```
+- Display the **Logout** button **only if the user is logged in**
+- When clicked, it should trigger a logout request to the server
 
-	For example, this returns a date 5 seconds in the past, and returns a string that can be used as the value of the `Expires` attribute.
+```tsx
+<!-- Nav.tsx -->
+	<>
+	     {isLoggedIn && <button onClick={handleLogout}>Logout</button>}
+	</>
+```
 
-3. Verify that the user can be logged out.
-	1. Log in with a name.
-	2. Note the session ID.
-	3. Log out, and check that the session ID is cleared on the browser.
+The `handleLogout` function should:
+
+1. Call the logout request
+2. Update the UI (set `isLoggedIn` to `false`)
+3. Redirect the user to the home page
+
+#### 🔌 **Step 2: Create the Logout Route (Server)**
+
+- Create a route: `POST /logout`
+- Connect it to the `logout()` controller
+
+Inside the `logout()` function:
+
+1. Invalidate or remove the session on the server
+2. Expire the session cookie
+
+To  [expire the cookie](https://pdmelo.github.io/420-4W6-Web-Programming-II/#/Notes/Week11/cookies?id=%e2%8f%b3-expires-and-max-age), set the `Expires` attribute of the `Set-Cookie` header to a past date:
+
+  ```ts
+  new Date(new Date().getTime() - 5000).toUTCString();
+  ```
+
+This generates a timestamp in the past, causing the browser to delete the cookie
+
+#### 🔍**Step 3: Verify Logout**
+
+Test your implementation:
+
+1. Log in with a username
+2. Open browser **DevTools → Application → Cookies**
+   - Note the `session_id` value
+3. Click **Logout**
+4. Verify:
+   - The `session_id` cookie is removed or expired
+   - The UI updates (Logout button disappears)
+   - The user is redirected to the home page
 
 
 
@@ -224,9 +389,9 @@ To really understand how the new session is being set after logging out, let's w
 >3. Logging out is important for security reasons, as it prevents unauthorized access to a user's account.
 
 
-### Part 4: 👑 Bonus Challenge
+### Part 4: 👑 Bonus *Fix Session Cleanup (Advanced Security)*
 
-When you logged out, you might have noticed that session data is not being cleared. This is because we are only clearing the session ID cookie, not the session data on the server. This means if someone got a hold of the session ID, they could still access the website as if they were logged in.
+When you logged out, you might have noticed that session data is not being cleared on the server. This is because we are only clearing the session ID cookie, not the session data on the server. This means if someone got a hold of the session ID, they could still access the website as if they were logged in.
 
 <div style="position:relative; width:100%; height:0px; padding-bottom:62.500%;">
 <iframe allow="fullscreen;autoplay" allowfullscreen height="100%" src="https://pdmelo.github.io/420-4W6-Web-Programming-II/images/4.3.3-Hijacking.mp4" width="100%" style="border:none; width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden; border-radius: 5px; ">

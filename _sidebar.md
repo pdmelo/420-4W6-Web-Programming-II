@@ -74,6 +74,7 @@
 **Week 12**
 
 - [4.2 Sessions](https://moodle.johnabbott.qc.ca/mod/hvp/view.php?id=67656)
+- [4.3 Sessions Exercise](Notes/Week11/43-sessions.md)
 
 **Guides**
 
