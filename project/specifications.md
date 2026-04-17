@@ -5,8 +5,8 @@
     -   **Proposal**: 7%
     -   **Implementation**: 25%
 -   📅 **Due**:
-    -   **Proposal**: April 25/26, 2025 @ 11:30
-    -   **Implementation**: TBD @ your demo appointment time, latest  May 14,2025
+    -   **Proposal**: April 24, 2026 in class.
+    -   **Implementation**: as per @ your demo appointment time, week of May 18,2026
 
 ## 🎯 Objectives
 
@@ -36,7 +36,7 @@ The project scope should scale with the number of people. In other words, I expe
 I ask that you go about your design and architecture in a meaningful and purpose-driven way. For this reason, I'm asking you to first write a proposal for your web app. This will make you think about the different models, controllers, views, routes, etc. that you will have to adhere to when it comes time for the implementation.
 
 >[!warning]
->While the due date for the proposal is **April 25/26**, the faster you submit, the more time you'll have to work on your implementation. I must look over your proposal and confirm that you're planning to meet all the criteria for the implementation phase. If there are things you're missing or need to fix, I will let you know so that you can incorporate my feedback. I can then give you the green light to get started.
+>While the due date for the proposal is **April 24**, the faster you submit, the more time you'll have to work on your implementation. I must look over your proposal and confirm that you're planning to meet all the criteria for the implementation phase. If there are things you're missing or need to fix, I will let you know so that you can incorporate my feedback. I can then give you the green light to get started.
 
 
 The proposal document should be the `README.md` for your repo. **Please look at the [Sample Proposal](/project/example-proposal)** to get an idea of how your proposal should look. If you're not familiar with writing markdown (`.md`) then please do this [short tutorial](https://www.markdowntutorial.com/). You can also look at how the `README.md` file for this repo was written.
