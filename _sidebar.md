@@ -81,6 +81,10 @@
 - [4.2 Sessions](https://moodle.johnabbott.qc.ca/mod/hvp/view.php?id=67656)
 - [4.3 Sessions Exercise](Notes/Week11/43-sessions.md)
 
+**Week 14**
+
+- [3.5 UI Testing](Notes/Week9/35-testing.md)
+
 **Guides**
 
 - [cURL](Guides/curl.md)
