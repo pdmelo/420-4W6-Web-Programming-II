@@ -10,17 +10,19 @@
 
 ## 🔨 Setup
 
-1. Navigate to the [template repository](https://github.com/JAC-CS-Web-Programming-II-W25/E3.5-Testing-Template) for this exercise. 
+1. Navigate to the [template repository](https://github.com/JAC-CS-Web-Programming-II-W26/E3.5-ReactTesting-Template) for this exercise. 
 2. Clone the Git repo from the CLI`git clone <paste URL from GitHub>` (without the angle brackets) or using a GUI client like Git Desktop
 3. Rename the cloned folder to `~/web-ii/exercises/3.5-testing/`.
 4. Start Docker Desktop.
 5. Assuming Docker is started, in VS Code, hit `CMD/CTRL + SHIFT + P`, search + run `dev container: open folder in container`, and select the downloaded folder.
 6. The dependencies in the client and server and the playwright folder will get installed.
-8. Run `ls` to make sure you’re in the root directory of the exercise and you see `client` and `server` folders.
-9. cd to `client` to run `npm run dev` to start the react development server.
-10. cd to `server` to run `npm run server` to start the server.
-11. Split the terminal into another JavaScript debug terminal , make sure you are In the **root directory** , then run `npm run test:ui` to start the **Playwright UI mode**.
-12. Open both the [frontend website](http://localhost:5173/) and the [test runner](http://localhost:3001/) in the browser.
+7. Run `ls` to make sure you’re in the root directory of the exercise and you see `client` and `server` folders.
+8. cd to `client` to run `npm run dev` to start the react development server.
+9. cd to `server` to run `npm run server` to start the server.
+10. Split the terminal into another JavaScript debug terminal , 
+    1. cd to **`client`** , then run `npm run test:ui` to start the **Playwright UI mode**.
+
+11. Open both the [frontend website](http://localhost:5173/) and the [test runner](http://localhost:3001/) in the browser.
 
 ## 🔍 Context
 
@@ -29,7 +31,7 @@ In the last exercise, we used **React** to build dynamic and interactive pages o
 Now, we’ll shift gears and focus on **testing our frontend applications** using [Playwright](https://playwright.dev/). Playwright is a powerful automation framework for web browsers. Its [UI mode](https://playwright.dev/docs/test-ui-mode) allows us to visually interact with a running browser instance controlled by Playwright. This is a fantastic tool for debugging frontend issues because we can see the application exactly as a user would, pinpoint rendering problems, and even inspect elements directly within the browser. Imagine being able to watch your application in action, click around, and see how the code translates to the visual elements on the screen - that’s the magic of Playwright’s UI mode, making debugging a breeze!
 
 <div style="position:relative; width:100%; height:0px; padding-bottom:62.500%;">
-	<iframe allow="fullscreen;autoplay" allowfullscreen height="100%" src="https://pdmelo.github.io/4W6-Winter-2025/images/3.3.1-playwright.mp4" width="100%" style="border:none; width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden; border-radius: 5px; ">
+	<iframe allow="fullscreen;autoplay" allowfullscreen height="100%" src="https://pdmelo.github.io/420-4W6-Web-Programming-II/images/3.3.1-playwright.mp4" width="100%" style="border:none; width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden; border-radius: 5px; ">
 	</iframe>
 </div>
 
