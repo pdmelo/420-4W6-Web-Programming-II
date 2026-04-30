@@ -14,7 +14,7 @@
 
 ## 🔨 Setup
 
-1. [Click here](https://classroom.github.com/a/vmxjeJhI) to join the Git classroom.You can fork the assignment from there.
+1. [Click here](https://github.com/JAC-CS-Web-Programming-II-W26/assignment-4-auth) to get the template.
 2. Make sure Docker Desktop is open.
 3. Start the development container in VS Code by using the `Dev Containers: Open Folder in Container...` command from the Command Palette (Ctrl or ⌘ + SHIFT + P) and select the cloned directory.
 4. Verify that the database was set up properly by running:
