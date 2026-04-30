@@ -1,13 +1,3 @@
-<!--
-**Final Project**
-
-- [Proposal Example](project/example-proposal.md)
-- [Specifications](project/specifications.md)
-
-- [3-Views](Assignments/3-views.md)
-- [4-Auth](Assignments/4-auth.md)
- -->
-
 **Final Project**
 
 - [Proposal Example](project/example-proposal.md)
@@ -18,6 +8,7 @@
 - [1-Models](Assignments/1-models.md)
 - [2-Controllers](Assignments/2-controllers.md)
 - [3-Views](Assignments/3-views.md)
+- [4-Auth](Assignments/4-auth.md)
 
 **Week 1**
 
@@ -97,36 +88,4 @@
 - [Testing](Guides/testing.md)
 - [TypeScript](Guides/typescript.md)
 - [Type Guards](Guides/type-guards.md)
-
-<!--
-
-
-**Week 11**
-
-- [Cookies](Notes/Week11/cookies.md)
-- [4.1 Cookies](Notes/Week11/41-cookies.md)
-- [4.2 Sessions](https://moodle.johnabbott.qc.ca/mod/hvp/view.php?id=51684)
-
-**Week 12**
-
-- [4.3 Sessions Exercise](Notes/Week11/43-sessions.md)
-- [4.3 Sessions Exercise](Notes/Week11/43-sessions.md)
-
-**Week 14**
-
-- [3.5 UI Testing](Notes/Week9/35-testing.md)
-
-  **Guides**
-
-- [Environment Setup](Guides/environment-setup.md)
-<!--
-- [cURL](Guides/curl.md)
-- [Debugging](Guides/debugging.md)
-- [Logging and Documentation](Guides/logging.md)
-- [Testing](Guides/testing.md)
-- [TypeScript](Guides/typescript.md)
-- [Type Guards](Guides/type-guards.md)
-- [PostresSQL](Guides/database.md)
-- [REST API](Guides/restapi.md)
 - [Troubleshooting](Guides/troubleshooting.md)
-  -->

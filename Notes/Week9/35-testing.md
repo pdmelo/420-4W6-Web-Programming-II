@@ -90,7 +90,7 @@ A Playwright test suite covering some basic routes is already written. However, 
 
    Breakpoints!
 
-   [Set breakpoints in your code](https://pdmelo.github.io/4W6-Winter-2025/#/Guides/debugging) to pause the execution and inspect the state of your application. This is a great way to understand how your code is working and to identify bugs.
+   [Set breakpoints in your code](https://pdmelo.github.io/420-4W6-Web-Programming-II/#/Guides/debugging) to pause the execution and inspect the state of your application. This is a great way to understand how your code is working and to identify bugs.
 
 Once all the tests are passing, you’re done! You’ve successfully debugged the application using Playwright’s UI mode. You’ve also gained a deeper understanding of how the frontend and backend work together to create a seamless user experience.
 
