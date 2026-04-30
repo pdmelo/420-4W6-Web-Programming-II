@@ -1,8 +1,8 @@
 # 4 - Auth
 
 - 💯 **Worth**: to a portion of your Final Project%
-- 📅 **Due**: May 20, 2025 @ 23:59
-- 🚫 **Penalty**: Nothing is accepted after due date and a grade of 0% will be given.
+
+- 📅 **Due**: With your Final project, 2026
 
 ## 🎯 Objectives
 
@@ -32,8 +32,8 @@
 
 To complete this assignment, you should be familiar with the following concepts and theories:
 
-- **[Cookies](https://pdmelo.github.io/4W6-Winter-2025/#/Notes/Week11/cookies)**: How to set and read cookies in a web application.
-- **[Sessions](https://pdmelo.github.io/4W6-Winter-2025/#/Notes/Week11/43-sessions)**: How to manage sessions in a web application.
+- **[Cookies](https://pdmelo.github.io/420-4W6-Web-Programming-II/#/Notes/Week11/cookies)**: How to set and read cookies in a web application.
+- **[Sessions](https://pdmelo.github.io/420-4W6-Web-Programming-II/#/Notes/Week11/43-sessions)**: How to manage sessions in a web application.
 
 > [!note]
 >
@@ -102,7 +102,6 @@ In the 4.X exercises, we learned about cookies/sessions and how to manage them u
 **Goal**: Implement the `User` model class which will represent a user in the system.
 
 1. Create
-
    - The `User` class should have a `create` method that will insert a new user into the database.
 
    - The database table for users has already been created for you. You can find the schema in `init.sql`.
@@ -116,7 +115,6 @@ In the 4.X exercises, we learned about cookies/sessions and how to manage them u
 > At this point, you should be comfortable with making models to represent entities of your application, so I won’t be providing a lot of guidance on this. If you’re unsure about how to do this, please refer back to the previous assignments where we created models for the Todo and SubTodo entities.
 
 2. Login
-
    - The `User` model should have a `login` method that will check if the email and password match a row in the users database table.
 
    - If the email and password match, the method should return a new `User` object. Similar to reading a single Todo.
@@ -124,7 +122,6 @@ In the 4.X exercises, we learned about cookies/sessions and how to manage them u
    - If the email and password do not match, we throw an `InvalidCredentialsError`.
 
 3. Testing
-
    - Find the tests for the `User` model in `user.model.test.ts`.
 
    - Implement the logic required to pass the tests for the `create` and `login` methods.
@@ -142,7 +139,7 @@ In the 4.X exercises, we learned about cookies/sessions and how to manage them u
 
 #### View
 
-1. In the client folder you have `Register.jsx`component which had the for for user to register.
+1. In the client folder you have `Register.tsx`component which had the for for user to register.
 2. The form should have fields for `email`, `password`, and `confirmPassword`.
 3. The form should have a submit button that will send a POST request to `/users`.
 4. Have an area to display any error messages that are passed in the query params.
@@ -150,14 +147,14 @@ In the 4.X exercises, we learned about cookies/sessions and how to manage them u
 User registration
 
 <div style="position:relative; width:100%; height:0px; padding-bottom:62.500%;">
-	<iframe allow="fullscreen;autoplay" allowfullscreen height="100%" src="https://pdmelo.github.io/4W6-Winter-2025/Assignments/images/A4-register.mp4" width="100%" style="border:none; width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden; border-radius: 5px; ">
+	<iframe allow="fullscreen;autoplay" allowfullscreen height="100%" src="https://pdmelo.github.io/420-4W6-Web-Programming-II/Assignments/images/A4-register.mp4" width="100%" style="border:none; width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden; border-radius: 5px; ">
 	</iframe>
 </div>
 
 User already exist
 
 <div style="position:relative; width:100%; height:0px; padding-bottom:62.500%;">
-	<iframe allow="fullscreen;autoplay" allowfullscreen height="100%" src="https://pdmelo.github.io/4W6-Winter-2025/Assignments/images/A4-register-duplicate.mp4" width="100%" style="border:none; width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden; border-radius: 5px; ">
+	<iframe allow="fullscreen;autoplay" allowfullscreen height="100%" src="https://pdmelo.github.io/420-4W6-Web-Programming-II/Assignments/images/A4-register-duplicate.mp4" width="100%" style="border:none; width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden; border-radius: 5px; ">
 	</iframe>
 </div>
 
@@ -179,26 +176,26 @@ User already exist
 
 3. If the login is unsuccessful, send a respond of `BadRequest` with an error message `"Invalid credentials."` using the same query param technique outlined in the tip above.
 
-4. The `AuthController` should have a `logout` method that will log the user out of the system when making a GET request to `/logout`.
+4. The `AuthController` should have a `logout` method that will log the user out of the system when making a POST request to `/logout`.
 
 5. This should clear the session.
 
 #### View
 
-1. The `react application` should have a `login` component that will render a login form view when making a GET request to `/login`.
+1. The `react application` should have a `login` component that will render a login form view when making a POST request to `/login`.
 2. The form should have fields for `email` and `password`.
 3. The form should have a submit button that will send a POST request to `/login`.
 4. Upon submission, the validate that no fields are blank/missing, and that the email and password match a user in the database. If there are any errors, display error message to the user.
-5. The form should also have a checkbox for “Remember Me”. If this checkbox is checked when the form is submitted, the server should set a cookie to remember the user’s email. When the user logs out and visits the login page again, the email field should be pre-filled with the value of this cookie.(OPTIONAL)
+5. The form should also have a checkbox for “Remember Me”. If this checkbox is checked when the form is submitted, the server should set a cookie to remember the user’s email. When the user logs out and visits the login page again, the email field should be pre-filled with the value of this cookie.**(OPTIONAL)**
 
 <div style="position:relative; width:100%; height:0px; padding-bottom:62.500%;">
-	<iframe allow="fullscreen;autoplay" allowfullscreen height="100%" src="https://pdmelo.github.io/4W6-Winter-2025/Assignments/images/A4-login.mp4" width="100%" style="border:none; width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden; border-radius: 5px; ">
+	<iframe allow="fullscreen;autoplay" allowfullscreen height="100%" src="https://pdmelo.github.io/420-4W6-Web-Programming-II/Assignments/images/A4-login.mp4" width="100%" style="border:none; width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden; border-radius: 5px; ">
 	</iframe>
 </div>
 
 ### Part 4: Todo Authentication (40%)
 
-**Goal**: Ensure that only authenticated users can access the Todo-related routes.
+**Goal**: Update `TodoController.ts` to ensure that only authenticated users can access the Todo-related routes.
 
 1. You’ll need to update the Todos table/model to accept a `user_id`/`userId` parameter, respectively, for the `todos.model.test.ts` to pass.
 
@@ -207,14 +204,14 @@ User already exist
 3. Since a Todo can only be created by an authenticated user, you should also update the `createTodo` method in the `TodoController` to set the `userId` parameter of the Todo to the `userId` parameter of the session. Also, ensure that a Todo can only be updated/deleted by the user who created it. To achieve this, notice the `todos` database table now has a `userId` column to signify that each todo belongs to a user, and the `TodoProps` interface has been updated to reflect this.
 
 <div style="position:relative; width:100%; height:0px; padding-bottom:62.500%;">
-	<iframe allow="fullscreen;autoplay" allowfullscreen height="100%" src="https://pdmelo.github.io/4W6-Winter-2025/Assignments/images/A4-authentication.mp4" width="100%" style="border:none; width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden; border-radius: 5px; ">
+	<iframe allow="fullscreen;autoplay" allowfullscreen height="100%" src="https://pdmelo.github.io/420-4W6-Web-Programming-II/Assignments/images/A4-authentication.mp4" width="100%" style="border:none; width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden; border-radius: 5px; ">
 	</iframe>
 </div>
 
 #### View
 
 1. Ensure on the client side, that no endpoint bypass the login.
-1. Look at all the components and the router in the App.jsx , you want all authenticated and authorised users to have access to them.
+1. Look at all the components and the router in the App.tsx , you want only authenticated and authorised users to have access to them.
 
 ## 💡 Tests & Tips
 
@@ -225,11 +222,10 @@ User already exist
 > Passing all the tests is **not an indicator for obtaining 100%**. Granted, when you do pass all the tests it’s definitely a good sign. However, the tests are provided as an aide for you to guide your development.
 
 - The tests will give you an idea about what I’ll be looking for, but I haven’t written tests for every single case. You should be testing your code manually as well. Here are some non-exhaustive examples of things you should be testing:
-
   - **400 Bad Request**: If a user tries to create an entity with a blank field, for example, you should return a 400 Bad Request status code and an error message.
   - **404 Not Found**: If a user tries to perform an action on an entity that doesn’t exist, you should return a 404 Not Found status code.
   - **401 Unauthorized**: If an unauthenticated user tries to perform an action on an entity that they need to be authenticated for, you should return a 401 Unauthorized status code.
-  - **403 Forbidden**: If an authenticated user tries to perform an action on an entity that they didn’t create, you should return a 401 Unauthorized status code.
+  - **403 Forbidden**: If an authenticated user tries to perform an action on an entity that they didn’t create, you should return a 403 Forbidden status code.
 
 - Ensure the database is being affected how you think it should be by pausing on a breakpoint in your code and running a select statement on the database using `psql`.
 
@@ -241,7 +237,6 @@ User already exist
 4. `npm run test` (debug terminal)
 
 - Follow the steps outlined above and run the tests according to which feature you’re currently working on. Remember to **not run all the tests**, but instead, run the tests for the feature you’re currently working on. For non-Playwright tests, stick a `test.only` in the test you’re working on to run only that test.
-
   - `npm run test -- user.model` to run only the tests for the `User` model.
 
   - `npm run test -- todo.model` to run only the tests for the `Todo` model.
@@ -250,7 +245,7 @@ User already exist
 
   - `npm run test -- todo.http` to run only the tests for the `Todo` controller.
 
-- Does the test time out before you’re done debugging? Increase the timeout time inside `playwright.config.ts`.I don't the browser test, time permitting I will add them
+- Does the test time out before you’re done debugging? Increase the timeout time inside `playwright.config.ts`.I don't write the browser test.
 - Does the debugger take you through weird code that you didn’t write? Make better use of the “Continue” button. If there are 2 breakpoints you want to hit, for example one in the test and on in the controller, you can set them both and then click “Continue” to hit the second one instead of trying to step over every single line of code.
 
 ## 📥 Submission
@@ -276,6 +271,5 @@ To submit your assignment, follow these steps:
    ```
 
 3. Submit your assignment on Gradescope.
-
    1. Go to [gradescope.ca](http://gradescope.ca/) (**not .com!**), log in, and click the link for this assignment.
    2. Select the correct repository and branch from the dropdown menus.
